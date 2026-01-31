@@ -189,3 +189,65 @@ Save edited section data as CSV.
 2. Specify filename and save
 
 Filename format: `{audio filename}.{timestamp}.sections.csv`
+
+## Parameter Format
+
+This section explains the format of values entered in `_params` columns.
+
+### Basic Format
+
+```
+{intensity 0-100}{text}
+```
+
+**Examples**:
+- `30` - Intensity 30
+- `30full` - Intensity 30, text "full"
+- `70base` - Intensity 70, text "base"
+
+### Changing Values
+
+```
+{start value}->{end value}{text}
+```
+
+**Examples**:
+- `10->30` - Intensity changes from 10 to 30
+- `0->50full` - Intensity changes from 0 to 50, text "full"
+
+### Text Purpose
+
+The text portion is used in combination with "Text Rules".
+
+**Linear (Penis) Preset Example**:
+| Text | Range |
+|------|-------|
+| full | 0-100% |
+| tip | 70-100% |
+| shaft | 30-70% |
+| base | 0-30% |
+
+**Rotation Preset Example**:
+| Text | Action |
+|------|--------|
+| clockwise | Rotate in positive direction |
+| counter-clockwise | Rotate in negative direction |
+
+## Device-Specific Production Tips
+
+### Linear Devices (A10 Piston, The Handy, etc.)
+
+- **Use simple waveforms**: Triangle waves with basic up-down motion are recommended
+- **Avoid complex shapes**: Complex waveforms can cause jerky device movement
+- **Rest position**: Initial and rest positions should be at top (value = max value)
+
+### Vibration Devices (Anal plugs, etc.)
+
+- **Rest position**: Initial and rest positions should be at bottom (value = 0)
+- **Triangle/Sine waves**: Use for piston-like motion effects
+
+### Rotation Devices (Nipple machines, etc.)
+
+- **Allow negative values**: Enable "Allow Negative Values" to switch rotation direction
+- **Positive = clockwise, Negative = counter-clockwise**
+- **Separate left/right control**: For nipple-focused content, setting different waveforms for left and right increases immersion
