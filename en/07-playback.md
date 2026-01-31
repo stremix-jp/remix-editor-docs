@@ -25,8 +25,6 @@ In remix-editor, you can preview patterns while playing audio. When devices are 
 | FLAC | .flac |
 | AAC | .aac |
 
-**File size limit**: Max 100MB
-
 ### Auto-Restore
 
 Loaded audio files are saved in the browser and automatically restored on next launch.

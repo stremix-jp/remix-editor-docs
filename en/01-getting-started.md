@@ -14,7 +14,7 @@ This guide explains the basic usage of remix-editor.
 1. Drag and drop an audio file onto the audio area in the **footer**
 2. Or click to open the file selection dialog
 
-Supported formats: MP3, WAV, M4A, OGG, FLAC, AAC (max 100MB)
+Supported formats: MP3, WAV, M4A, OGG, FLAC, AAC
 
 ### 2. Create a Pattern
 

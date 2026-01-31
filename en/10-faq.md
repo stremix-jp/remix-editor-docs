@@ -35,8 +35,7 @@ Data is saved in the browser's LocalStorage and IndexedDB. Data is never sent to
 
 Check the following:
 1. Is it a supported format? (MP3, WAV, M4A, OGG, FLAC, AAC)
-2. Is file size 100MB or less?
-3. Is the file corrupted?
+2. Is the file corrupted?
 
 ### Q: Audio won't play
 
