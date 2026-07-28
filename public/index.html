@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>remix-editor Documentation</title>
+    <script>
+      // ブラウザ言語で /ja/ か /en/ へ振り分ける（JS 無効時は下のリンクを表示）
+      var lang = (navigator.language || 'en').toLowerCase().indexOf('ja') === 0 ? 'ja' : 'en';
+      location.replace('/' + lang + '/');
+    </script>
+    <style>
+      body { font-family: system-ui, sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0; }
+      a { font-size: 1.25rem; margin: 0 1rem; }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <p><a href="/ja/">日本語</a> | <a href="/en/">English</a></p>
+    </noscript>
+  </body>
+</html>

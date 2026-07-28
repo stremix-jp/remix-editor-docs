@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "remix-editor-docs",
+
+  // 複数 CF アカウント所属マシンでの取り違え防止（cf-mint-model の account_id ピン留め）。
+  // stremix.jp zone を持つ会社アカウント（stremix-api-hono と同一）。
+  "account_id": "128e81cf79c7fedca2b52170973971b2",
+
+  "compatibility_date": "2026-07-01",
+
+  // 公開ドキュメントサイト。custom_domain 経由のみ（workers.dev は無効化）。
+  "workers_dev": false,
+  "routes": [{ "pattern": "remix-editor-docs.stremix.jp", "custom_domain": true }],
+
+  "assets": {
+    "directory": ".vitepress/dist",
+    "not_found_handling": "404-page"
+  },
+
+  "observability": { "enabled": true }
+}
