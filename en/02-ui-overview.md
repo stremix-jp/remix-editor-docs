@@ -1,45 +1,62 @@
 # UI Overview
 
-The remix-editor interface consists of multiple panels. Each panel can be moved and resized by dragging.
+The remix-editor screen consists of multiple panels. Each panel can be moved, resized, and turned into a tab by dragging.
 
 ## Overall Layout
 
 ![Full Screen](./images/01-full-screen.png)
 
-The screen consists of the following areas:
+From top to bottom, the screen consists of three areas.
 
 | Area | Contents |
 |------|----------|
-| Header | Menu bar |
-| Left Panel | Pattern list, device connection |
-| Center Panel | Curve editor (main editing area) |
-| Right Panel | Point editing, waveform generation tools |
-| Footer | Audio player, playback controls |
+| Top | Menu bar |
+| Center | Panel area (multiple panels you can arrange freely) |
+| Bottom | Playback footer |
 
-## Pattern List
+## Menu Bar
 
-![Pattern List](./images/02-pattern-list.png)
+There are 5 menus.
 
-A panel for managing control patterns.
+| Menu | Main items |
+|------|------------|
+| File | Open Remix / Import Funscript / Import CSV / Load Audio / Import Section Data / Save Remix / Export Section Data / Import & Export Waveform Library |
+| Edit | Undo / Redo / Settings (Ctrl + ,) |
+| View | Layout ▸ (presets, lock, reset) / Panels ▸ (toggle each panel) |
+| Device | Connect... / Disconnect |
+| Help | Documentation / About remix-editor |
 
-### Features
+At the right end of the menu bar, a lock indicator appears while the layout is locked.
 
-- **Add Pattern**: Create a new pattern with the "+" button
-- **Select Pattern**: Click to switch the editing target
-- **Delete Pattern**: Delete with the trash icon (confirmation dialog)
-- **Rename**: Double-click to enter edit mode
-- **Change Color**: Click the color icon
-- **Show/Hide**: Toggle with the eye icon
+## Panel List
 
-### Pattern Settings
+There are 9 panels. Show or hide each one with the checkboxes in **View > Panels**.
 
-The following settings are available for each pattern:
+| Panel | Role |
+|-------|------|
+| Curve Editor | Main editing area |
+| Patterns | Pattern list, settings, and device mapping |
+| Devices | Intiface connection, device list, and test control |
+| Waveform Library | Manage saved waveform snippets in folders |
+| Sections | Section data table and waveform generation |
+| Properties | Edit the selected point numerically |
+| Waveform Generator | Procedurally generate sine, triangle, and other waveforms |
+| Generate from Audio | Generate a waveform from audio volume |
+| Throttle Control | Record values with a vertical slider while playing |
 
-- Maximum value (maxValue)
-- Value step (quantization interval)
-- Allow negative values
-- Preferred device type
-- Preferred actuator type
+There is also a **Settings** panel, which you open when you need it with **Edit > Settings** (Ctrl + ,).
+
+In the default layout, **Throttle Control** and **Waveform Library** are placed as tabs in the same group.
+
+### Panel Header Actions
+
+The right side of each panel header has the following buttons.
+
+- **Gear**: Open the related settings category (Curve Editor and Devices only)
+- **Open in New Window**: Detach the panel into an independent window
+- **Maximize / Restore**: Temporarily expand the panel to fill the screen
+
+While the layout is locked, actions such as maximizing are greyed out.
 
 ## Curve Editor
 
@@ -47,74 +64,102 @@ The following settings are available for each pattern:
 
 The main editing area. Edit points on a graph with time (horizontal axis) and value (vertical axis).
 
-### Display Elements
+### Elements in the Panel
 
-- **Grid**: Time and value markings
-- **Points**: Points that make up the curve
-- **Curve Line**: Lines connecting points
-- **Playhead**: Current playback position (red vertical line)
-- **Selection**: Selected area (blue rectangle)
-- **Background Waveform**: Audio waveform (optional)
+The following elements are stacked from top to bottom (each can be shown or hidden in Settings > Editor).
 
-### Operations
+- **Toolbar**: Undo/Redo, selection actions, pivot, playhead, and view buttons
+- **Quick Point Bar**: A row of value buttons at fixed steps. Click or press a number key to add a point at the playback position
+- **Canvas**: Grid, points, curve lines, playhead (vertical line), selection, pivots, and the audio waveform background
+- **Viewport slider**: A slider showing the position and width of the visible range
+- **Hint bar**: Hints for the main mouse operations
 
-- **Left Click**: Add/select point
-- **Drag**: Move point / selection
-- **Right Drag**: Pan viewport
-- **Wheel**: Zoom in/out
-- **Shift + Drag**: Range selection
+### Main Operations
+
+- **Left click**: Add / select point
+- **Left drag**: Move point
+- **Right drag**: Pan the viewport
+- **Wheel**: Zoom in / out
+- **Shift + Drag**: Select a time range
+- **Ctrl + Drag**: Rectangular selection
+- **Right click**: Context menu
 
 See [Curve Editing](./04-curve-editing.md) for details.
 
-## Property Panel
+## Patterns Panel
+
+![Pattern List](./images/02-pattern-list.png)
+
+A panel for managing control patterns.
+
+- **Add Pattern**: Create a new pattern with the "+" button
+- **Select Pattern**: Click to switch the editing target
+- **Expand settings**: Open and close the settings area with the "▶" left of the name
+- **Output on/off**: Toggle output to the device with the power icon
+- **Show/Hide**: Toggle display in the Curve Editor with the eye icon
+- **Delete Pattern**: Delete with the trash icon
+- **Settings**: Name, Color, Max, Step, Allow Negative Values, Preferred Device, Preferred Actuator
+- **Device Mapping**: Choose which actuator the pattern is sent to
+
+Below the pattern name, the value at the current playback position and the assigned device are shown.
+
+See [Pattern Management](./03-patterns.md) for details.
+
+## Properties Panel
 
 ![Property Panel](./images/08-property-panel.png)
 
-Edit coordinates of selected points numerically.
+Edit the coordinates of the selected point numerically.
 
-- **Time**: Point's time position (seconds)
-- **Value**: Point's value
+- **Time (sec)**: The point's time position
+- **Value**: The point's value
 
-Relative movement is available for multiple selections.
+With multiple points selected, the number of selected points and the time range are shown, and you can delete them all at once. The time of the start and end points cannot be changed.
 
 ## Waveform Generator Panel
 
 ![Waveform Generator](./images/07-waveform-generator.png)
 
-Generate waveform patterns in the selected range.
+Generates a waveform in the selected time range. There are 5 waveform types: Sine Wave, Triangle Wave, Triangle (Slope), Square Wave, and Random Wave.
 
-Supported waveforms:
-- Sine wave
-- Triangle wave
-- Square wave
-- Random wave
-- Audio analysis waveform
+Press "Generate Waveform" to start a preview, adjust the parameters while checking the result, and press "Apply" to commit.
 
 See [Curve Editing > Waveform Generation](./04-curve-editing.md#waveform-generation) for details.
 
-## Device Panel
+## Generate from Audio Panel
+
+Analyses the volume of the loaded audio (or a separately selected audio file) and generates a waveform. This panel also follows the preview → apply flow.
+
+## Throttle Control Panel
+
+Move the vertical slider to record its value as a point. If you move it during playback, values are recorded continuously at the time step interval. Use it when you want to shape a curve by hand, like playing an instrument.
+
+## Waveform Library Panel
+
+A panel for saving frequently used waveforms as snippets. You can organise them into folders and export or import them as files.
+
+## Devices Panel
 
 ![Device Panel](./images/06-device-panel.png)
 
-Displays connection status with Intiface Central and device list.
+Shows the connection status with Intiface Central and the device list.
 
-- **Connect/Disconnect**: Control connection to Intiface
-- **Scan**: Search for devices
-- **Device List**: Show connected devices
-- **Test Control**: Direct device control with slider
+- **Connect/Disconnect**: Control the connection to Intiface
+- **Device list**: Show connected devices (the inferred device type is shown as a badge)
+- **Test Control**: Expand a row to reveal a slider per actuator and drive the device directly
 
 See [Device Connection](./06-devices.md) for details.
 
-## Section Panel
+## Sections Panel
 
 ![Section Panel](./images/04-section-panel.png)
 
-Display and edit section data imported from CSV.
+Displays and edits section data imported from CSV in a table.
 
-- **Section List**: Show time ranges and attributes
-- **Navigation**: Move between sections with arrow keys
-- **Set as Selection**: Set section range as selection
-- **Waveform Generation**: Auto-generate waveforms from attribute values
+- **Click a row**: Set that section as the Curve Editor selection and move the playback position to the start of the section
+- **Edit a cell**: Click to edit directly
+- **Generate button in the column header**: Generate a waveform from the values of a `_params` column
+- **Toolbar**: Import/export CSV, clear, move to the previous/next section, toggle auto-scroll to the playback position
 
 See [Sections](./05-sections.md) for details.
 
@@ -122,28 +167,42 @@ See [Sections](./05-sections.md) for details.
 
 ![Footer](./images/05-footer.png)
 
-Audio playback and playback controls.
+Handles audio playback and playback controls.
 
-### Playback Controls
+- **Transport**: Skip to Start / Play-Pause / Skip to End (when sections exist, these become Previous Section / Next Section buttons)
+- **Play from Selection**
+- **Time display**: Current playback position / total length
+- **Media drop zone**: Drop and remove audio files
+- **Seek slider**: Drag to change the playback position (snaps to the time step)
+- **Playback Speed**: 0.25x / 0.5x / 0.75x / 1x / 1.25x / 1.5x / 2x
+- **Volume and mute**
+- **Loop**: Loop the selection if there is one, otherwise loop the whole timeline
 
-- **Play/Pause**: Space key or button
-- **Stop**: Stop playback and return to start
-- **Playback Speed**: 0.25x to 8x
-- **Volume**: 0% to 100%
-- **Repeat**: Loop playback of selection or viewport
+## Customizing the Layout
 
-### Audio Player
+### Arranging Panels
 
-- **Waveform Display**: Show audio waveform
-- **Seek**: Click waveform to change playback position
-- **Current Time/Total Time**: Display playback position
+- **Move**: Drag a tab to another position or group
+- **Resize**: Drag a panel border
+- **Tabbing**: Drop a panel onto another panel to put both in the same group as tabs
 
-## Panel Customization
+### Layout Presets
 
-Each panel can be customized with the following operations:
+Choose a preset for your use case from **View > Layout**.
 
-- **Move**: Drag the title bar
-- **Resize**: Drag panel borders
-- **Maximize**: Double-click the title bar
+| Preset | Use case |
+|--------|----------|
+| Audio Mode (Simple) | Minimal setup for editing along audio |
+| Audio Mode (Detailed) | Audio editing with the supporting panels laid out as well |
+| Review Mode | Setup for playing back and reviewing a finished Remix |
+| Simple Mode | Minimal setup for concentrating on curve editing |
 
-Layout is automatically saved and restored on next launch.
+Use **Reset** to return to the default layout.
+
+### Locking the Layout
+
+Use **View > Layout > Lock Layout** to fix the layout. While locked, panels cannot be moved, resized, or maximized, which prevents you from accidentally breaking the layout while editing.
+
+You can also unlock it by clicking the lock indicator at the right end of the menu bar.
+
+The layout and lock state are saved automatically and restored on the next launch.

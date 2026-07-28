@@ -4,8 +4,8 @@ remix-editor は、時間軸に沿った値の変化（カーブ）を視覚的�
 
 ## 目次
 
-1. [はじめに](./01-getting-started.md) - インストールと基本的な使い方
-2. [画面構成](./02-ui-overview.md) - 各パネルの役割
+1. [はじめに](./01-getting-started.md) - 基本的な使い方とワークフロー
+2. [画面構成](./02-ui-overview.md) - パネルとレイアウト
 3. [パターン管理](./03-patterns.md) - コントロールパターンの作成・編集
 4. [カーブ編集](./04-curve-editing.md) - ポイントの追加・移動・削除
 5. [セクション](./05-sections.md) - セクションデータの管理
@@ -19,6 +19,7 @@ remix-editor は、時間軸に沿った値の変化（カーブ）を視覚的�
 
 - モダンブラウザ（Chrome, Firefox, Edge, Safari）
 - デバイス制御には [Intiface Central](https://intiface.com/central/) が必要
+- インストールやログインは不要です。編集内容はブラウザ内に自動保存されます
 
 ## フィードバック
 

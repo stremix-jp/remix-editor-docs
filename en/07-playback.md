@@ -1,18 +1,22 @@
 # Playback
 
-In remix-editor, you can preview patterns while playing audio. When devices are connected, they are controlled in real-time.
+In remix-editor, you can preview patterns while playing audio. When devices are connected, they are controlled in real time.
 
 ## Loading Audio Files
 
 ### Drag and Drop
 
-1. Drag audio file to audio area in footer
+1. Drag an audio file onto the media area in the footer
 2. Drop to load
+
+Audio files are loaded no matter where in the application you drop them.
 
 ### File Selection
 
-1. Click audio area
-2. Select from file dialog
+1. Click the media area
+2. Select from the file dialog
+
+You can also load a file from **File > Load Audio...** in the menu.
 
 ### Supported Formats
 
@@ -24,12 +28,35 @@ In remix-editor, you can preview patterns while playing audio. When devices are 
 | OGG | .ogg |
 | FLAC | .flac |
 | AAC | .aac |
+| WebM | .webm |
+
+**The file size limit is 100MB.** Larger files show "File too large (max 100MB)" and are not loaded.
 
 ### Auto-Restore
 
-Loaded audio files are saved in the browser and automatically restored on next launch.
+Loaded audio files are stored in the browser (IndexedDB) and automatically restored on next launch.
+
+However, files larger than **Settings > General > Audio Cache Limit** (default 50MB) are not stored and disappear on reload. Setting the limit to `0` disables the cache (it does not mean unlimited).
+
+### Adjusting the Remix Length
+
+If the loaded audio length and the Remix max time differ by 3 seconds or more, the "Adjust Remix Length" dialog appears.
+
+- **Adjust**: extends/shortens the max time to match the audio length
+- **Don't Adjust**: keeps the current max time
+
+When shortening, the number of points that will be deleted is shown as a warning.
 
 ## Playback Controls
+
+Operate from the transport in the footer.
+
+| Button | No sections | With sections |
+|--------|-------------|---------------|
+| Leftmost | Skip to Start | Previous Section |
+| Center | Play / Pause | Play / Pause |
+| Center right | Play from Selection | Play from Selection |
+| Rightmost | Skip to End | Next Section |
 
 ### Play/Pause
 
@@ -37,37 +64,32 @@ Loaded audio files are saved in the browser and automatically restored on next l
 - Press during playback to pause
 - Press while paused to resume
 
-### Stop
-
-- Click stop button
-- Playback stops and position returns to start
-
 ### Seek (Move Playback Position)
 
-- Click on audio waveform
-- Drag playhead area on curve editor
-- Move to any position
+- Drag the seek bar in the footer (**snaps to the time step**)
+- Click / drag the playhead area of the curve editor
+- Click a row in the section table (moves to the start of that section)
 
 ## Playback Speed
 
 ### Change Speed
 
-Change with speed selector in footer.
+Click the speed display in the footer to select from the speed list.
 
 | Speed | Use Case |
 |-------|----------|
 | 0.25x | Detailed checking |
 | 0.5x | Slow playback |
+| 0.75x | Slightly slower |
 | 1x | Normal speed |
-| 1.5x | Slightly faster |
+| 1.25x | Slightly faster |
+| 1.5x | Faster |
 | 2x | Double speed |
-| 4x | High-speed checking |
-| 8x | Ultra-high-speed checking |
 
 ### Shortcuts
 
-- **Shift + >**: Speed up (cycles)
-- **Shift + <**: Speed down (cycles)
+- **Shift + >**: Increase Speed (cycles)
+- **Shift + <**: Decrease Speed (cycles)
 
 Wraps at max/min.
 
@@ -75,134 +97,154 @@ Wraps at max/min.
 
 ### Volume Adjustment
 
-- Adjust 0% to 100% with volume slider
+- Adjust 0% to 100% with the volume slider
 - Mute button for instant silence
 
-## Repeat Playback
+## Loop Playback
 
-### Repeat Mode
+### Loop Mode
 
-Click repeat button to enable loop playback.
+Click the loop button to enable loop playback (the button is highlighted while enabled).
 
 ### Loop Range
 
 | Condition | Loop Range |
 |-----------|------------|
 | Selection exists | Selection |
-| No selection | Current viewport range |
+| No selection | Whole timeline (audio length, or max time) |
 
-During repeat, playback automatically returns to start when reaching end.
+While looping, playback automatically returns to the start position when reaching the end.
 
 ## Pivot Function
 
-Pivot is like a "favorite position". Remember frequently accessed positions.
+A pivot is like a "favorite position". It remembers positions you return to frequently. **Multiple pivots** can be registered.
 
-### Set Pivot
+### Add a Pivot
 
-- Press **P** key
-- Current playback position is saved as pivot
-- Press **P** again to clear (toggle behavior)
+- Press the **P** key
+- The current playback position is **added** as a pivot (existing pivots are kept)
+- No pivot is added at a nearly identical position (within ±0.001 sec)
 
-### Jump to Pivot
+To remove pivots, use the curve editor toolbar, or the context menu items "Remove Pivot" / "Remove Pivots in Selection".
 
-- **Shift + P**
-- Viewport moves to pivot position
+### Moving Between Pivots
 
-### Move Playback to Pivot
+| Key | Action |
+|-----|--------|
+| Shift + P | Jump to Next Pivot (wraps to the first after the last) |
+| Ctrl + Shift + P | Jump to Previous Pivot (wraps to the last before the first) |
+| Ctrl + P | Move the playback position to the selected pivot |
 
-- **Ctrl + P**
-- Playback position moves to pivot position
+### Moving by Dragging
+
+Pivots shown in the playhead area of the curve editor can be repositioned by dragging.
 
 ### Persistence
 
-Pivot position is automatically saved and maintained on next launch.
+Pivot positions are automatically saved and maintained on next launch. They are covered by Undo and are also saved in the Remix file.
 
 ## Playback Position Operations
 
-### Jump to Playback Position
+### Jump to Playhead
 
 - **J** key
 - Viewport moves to current playback position
-- Useful when you lose track of playback position while editing
+- Useful when you lose track of the playback position while editing
+
+### Follow Playhead
+
+- **F** key, or toggle from the curve editor toolbar
+- When enabled, the viewport scrolls automatically with playback
+- Disabled by default. Can also be changed in **Settings > Playback > Follow Playhead**
+
+### Jumping to Points
+
+| Key | Action |
+|-----|--------|
+| Alt + → | Move the playback position to the next point |
+| Alt + ← | Move the playback position to the previous point |
+| N | Select the next point |
+| B | Select the previous point |
 
 ### Drag Playhead
 
-Drag the playhead area at top of curve editor to change playback position.
+Drag the playhead area at the top of the curve editor to change the playback position.
 
-### playheadOffset (Playback Position Offset)
+### Playhead Offset
 
-Set offset between audio and curve editor timing.
+You can set an offset between the audio and the timing of what is sent to devices.
 
-- Range: -1 second to +1 second
+- Default: **0.2 sec**
+- Range: -1 second to +1 second (positive values make the device lead, negative values delay it)
 - Use: Compensate for device response delay
 
-Change in Settings > Audio Settings.
+Change it in **Settings > Playback > Playhead Offset**.
 
 ## Selection Playback
 
-### Play from Selection Start
+### Play from Selection
 
-1. Select range in curve editor
-2. Click "Play from Start" button in footer
-3. Playback starts from selection start position
+1. Select a range in the curve editor
+2. Click the "Play from Selection" button in the footer
+3. Playback starts from the selection start position
+
+The button is disabled when there is no selection.
 
 ### Play from Section
 
-1. Select section in section panel
-2. "Set as Selection" to reflect in curve editor selection
-3. "Play from Start" to play
+Clicking a row in the section table sets the curve editor selection to that section and moves the playback position to the start of the section at the same time. From there, press Space to play.
+
+See [Sections](./05-sections.md) for details.
 
 ## Background Waveform Display
 
-Display audio waveform in curve editor background.
+Display the audio waveform in the curve editor background.
 
 ### Settings
 
-1. Open Settings > Audio Settings
-2. Enable "Show Background Waveform"
+1. Open **Settings > Editor**
+2. Enable "Show Waveform Background" (enabled by default)
 
 ### Adjustment Items
 
-| Setting | Description | Range |
-|---------|-------------|-------|
-| Waveform Scale | Waveform height | 10% - 100% |
-| Waveform Samples | Waveform resolution | 50 - 4000 |
+| Setting | Description | Default |
+|---------|-------------|---------|
+| Auto Scale Waveform | Automatically scale to the maximum value on screen | Enabled |
+| Waveform Scale | Waveform height (%) | 50% |
+| Waveform Sample Count | Waveform resolution (50 - 4000) | 2000 |
 
 Increasing samples shows more detail but increases processing load.
 
 ## Throttle Control
 
-Feature to input values in real-time during playback.
+Feature to input values in real time during playback. It is operated from the dedicated "Throttle Control" panel.
 
-### Enable
-
-1. Open Settings > Advanced Settings
-2. Turn on "Enable Throttle Control"
+In the default layout it is a tab in the same group as "Waveform Library". If you closed the panel, reopen it with **View > Panels > Throttle Control**.
 
 ### Usage
 
-1. Start playback
-2. Operate vertical slider
-3. Values are recorded as points in real-time
+1. Select the active pattern
+2. Start playback
+3. Grab and drag the vertical slider
+
+- One point is added at the current playback position the moment you grab the slider
+- **Only during playback**, the dragged value is recorded continuously at time step intervals
+- Values are treated as a ratio from 0 to 1 and recorded multiplied by the pattern's max value
+- Releasing the drag groups the whole recording into a single Undo step
 
 Useful for live input.
 
 ## Device Synchronization
 
-During playback, pattern values are automatically sent to connected devices.
-
-### Send Timing
-
-- During playback: Update devices at about 60fps
-- While paused: Device maintains current position value
+During playback, pattern values are automatically sent to connected devices. The pattern's **output must be enabled** (power icon).
 
 ### Differences by Actuator Type
 
 | Type | Behavior |
 |------|----------|
 | Vibrate | Immediate control (value directly becomes intensity) |
-| Rotate | Immediate control (positive/negative changes direction) |
-| Linear | Position-based (moves on drag end) |
+| Rotate | Immediate control (positive/negative changes rotation direction) |
+| Linear | Position-based (takes time to move to the specified position) |
 
 ## Troubleshooting
 
@@ -210,15 +252,20 @@ During playback, pattern values are automatically sent to connected devices.
 
 1. Check browser mute
 2. Check volume slider
-3. Confirm file is supported format
+3. Confirm file is a supported format
+4. Confirm the file size does not exceed 100MB
+
+### Audio Disappeared After Reload
+
+Files larger than **Settings > General > Audio Cache Limit** (default 50MB) are not stored. Raise the limit, or load the file again each time.
 
 ### Playback Stuttering
 
-1. Reduce background waveform samples
+1. Reduce background waveform sample count
 2. Close other tabs
 3. Restart browser
 
 ### Device and Audio Out of Sync
 
-1. Adjust playheadOffset
+1. Adjust **Settings > Playback > Playhead Offset**
 2. Check device delay characteristics

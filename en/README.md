@@ -1,11 +1,11 @@
 # remix-editor User Guide
 
-remix-editor is a web application for visually editing time-based curves and controlling compatible devices.
+remix-editor is a web application for visually editing value changes along a timeline (curves) and controlling compatible devices.
 
 ## Table of Contents
 
-1. [Getting Started](./01-getting-started.md) - Installation and basic usage
-2. [UI Overview](./02-ui-overview.md) - Panel layout and functions
+1. [Getting Started](./01-getting-started.md) - Basic usage and workflow
+2. [UI Overview](./02-ui-overview.md) - Panels and layout
 3. [Pattern Management](./03-patterns.md) - Creating and editing control patterns
 4. [Curve Editing](./04-curve-editing.md) - Adding, moving, and deleting points
 5. [Sections](./05-sections.md) - Managing section data
@@ -19,6 +19,7 @@ remix-editor is a web application for visually editing time-based curves and con
 
 - Modern browser (Chrome, Firefox, Edge, Safari)
 - [Intiface Central](https://intiface.com/central/) required for device control
+- No installation or sign-in required. Your edits are saved automatically inside the browser
 
 ## Feedback
 

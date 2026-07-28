@@ -1,20 +1,20 @@
 # Sections
 
-Sections are interval data for audio. Import from CSV files and automatically generate waveforms from section attribute values.
+Sections are interval data for audio. Import them from a CSV file and automatically generate waveforms from section attribute values.
 
-## What are Sections?
+## What Are Sections?
 
-Sections are data associated with specific time ranges in audio.
+Sections are data associated with a specific time range in the audio.
 
-**Example**: A section from 0:30 to 0:45 with "Intensity: 10"
+**Example**: A section from 0:30 to 0:45 of the audio with "intensity: 10"
 
-This allows efficient creation of control patterns matched to audio content.
+This lets you efficiently build control patterns that match the content of the audio.
 
 ## Importing Sections
 
 ### CSV File Format
 
-Section CSV requires the following columns:
+A section CSV requires the following columns:
 
 | Column | Required | Description |
 |--------|----------|-------------|
@@ -22,7 +22,7 @@ Section CSV requires the following columns:
 | end_time | Yes | Section end time (seconds) |
 | (others) | No | Any attribute columns |
 
-**CSV Example**:
+**CSV example**:
 ```csv
 start_time,end_time,intensity_params,note
 0,10,5,Intro
@@ -31,168 +31,176 @@ start_time,end_time,intensity_params,note
 45,60,5,Outro
 ```
 
-**Note**: Columns used for waveform generation require the `_params` suffix (see details below).
+**Note**: Columns used for waveform generation require the `_params` suffix (details below).
 
-### Import Method
+### How to Import
 
-1. Select **File > Import Section CSV**
-2. Select CSV file
-3. Confirm preview
-4. Click "Import"
+1. Select **File > Import Section Data...**
+2. Select the CSV file
 
-Drag and drop is also supported.
+You can also import from the toolbar of the Sections panel, or by dragging and dropping the CSV file onto the app.
 
-## Section Panel
+## Sections Panel
 
-Imported sections are displayed in the section panel.
+Imported sections are displayed as a table.
 
-### Display Modes
+### What Happens When You Click a Row
 
-- **Current Section Only**: Show details of section at playback position
-- **All Sections**: Show list of all sections
+Clicking a row does two things at once.
 
-### Editing Sections
+1. The Curve Editor selection is set to that section's time range
+2. The playback position moves to the section's start time
+
+Because choosing a section already determines the target range for waveform generation, there is no need for a separate "set as selection" action.
+
+Use **Shift + click** to select several sections at once. The number of selected sections is shown as a badge in the toolbar.
+
+### Toolbar
+
+| Button | Function |
+|--------|----------|
+| Import | Load a section CSV |
+| Export | Write the current sections out to CSV |
+| Clear | Delete all sections |
+| ◀ / ▶ | Move to the previous / next section (the playback position moves as well) |
+| Auto-scroll | Make the table scroll automatically to follow the playback position |
+
+At the right end, the number of selected sections and the filename of the loaded CSV are shown.
+
+### Editing Cells
 
 1. Click a cell to enter edit mode
-2. Enter value
-3. **Enter** to confirm, **Escape** to cancel
+2. Enter a value
+3. **Escape** cancels; clicking outside the cell saves automatically
 
-For multi-line text, use **Ctrl + Enter** for line breaks.
+The key that confirms the edit depends on the column type.
+
+| Column type | Confirm | Line break |
+|-------------|---------|------------|
+| Single-line text | Enter | — |
+| Multi-line text | Ctrl + Enter or Shift + Enter | Enter |
+
+Cells in `_params` columns have a slider that lets you adjust the intensity intuitively.
 
 ## Section Navigation
 
-Navigate between sections with keyboard.
+You can move between sections with the keyboard.
 
 | Key | Action |
 |-----|--------|
-| Left Arrow | Move to previous section |
-| Right Arrow | Move to next section |
-| Shift + Left Arrow | Extend selection forward |
-| Shift + Right Arrow | Extend selection backward |
+| ← | Move to the previous section |
+| → | Move to the next section |
+| Shift + ← | Extend the selection to the previous section |
+| Shift + → | Extend the selection to the next section |
 
-When moving to a section, playback position also moves to that section's start.
-
-## Set Section as Selection
-
-1. Select a section in the section panel
-2. Click "Set as Selection" button
-3. Curve editor selection is set to section's time range
-
-This makes waveform generation per section easy.
+**Note**: Keyboard navigation only changes which section is selected; **the playback position does not move**. If you want the playback position to move as well, click a row or use the ◀ ▶ buttons in the toolbar or footer.
 
 ## Gap Sections
 
-When there are gaps between sections, "gap sections" are automatically generated.
+When there is empty space between sections, a "gap section" is generated automatically.
 
-- Display: Gray background, value is "-"
-- Editing: Not allowed
-- Purpose: Visualize gaps between sections
+- Display: grey background, value shown as "-"
+- Editing: not allowed
+- Navigation: included as a target for movement
 
-## Waveform Generation from Sections
+**Note**: In waveform generation, a gap section **inherits the value of the preceding section** (for a range value, it inherits the end value). It is displayed as "-", but that does not mean the value is 0.
 
-Automatically generate waveforms from section attribute values.
+## Generating Waveforms from Sections
 
-### Columns Available for Waveform Generation
+You can automatically generate a waveform from section attribute values.
+
+### Columns That Support Waveform Generation
 
 **Important**: Waveform generation is only available for columns whose names end with `_params`.
 
 **Examples**:
-- `intensity_params` ✓ Can generate waveforms
-- `speed_params` ✓ Can generate waveforms
-- `intensity` ✗ Cannot generate waveforms (treated as text column)
-- `note` ✗ Cannot generate waveforms
+- `intensity_params` ✓ Waveform generation possible
+- `speed_params` ✓ Waveform generation possible
+- `intensity` ✗ Not possible (treated as a text column)
+- `note` ✗ Not possible
 
-When creating your CSV, make sure to add the `_params` suffix to columns you want to use for waveform generation.
+When you create your CSV, be sure to add the `_params` suffix to any column you want to use for waveform generation.
 
-```csv
-start_time,end_time,intensity_params,note
-0,10,5,Intro
-10,30,10,Chorus
-30,45,15,Climax
-45,60,5,Outro
-```
+### Opening the Generation Dialog
 
-### Open Generation Dialog
+- Click the waveform icon in the column header in the Sections panel
 
-1. Click "Generate" button on column header in section panel
-2. Or select section, right-click > "Waveform Generation"
+A warning icon is shown in the header of any `_params` column that has no preset set.
 
-### Generation Modes
+### Settings in the Dialog
 
-#### Triangle Wave Generation
+| Item | Description |
+|------|-------------|
+| Target Column | Which `_params` column's values to use |
+| Target Sections | "All" or "Selected Only" |
+| Preset | Save and recall a whole set of settings |
+| Text Rules | How to interpret the text attached to a value |
+| Waveform Type | Linear / Triangle |
+| Advanced Options | Grouping, phase continuity, point optimization |
 
-Generate triangle waves based on section intensity values.
+### Waveform Types
 
-- Single value (e.g., `10`): Generate triangle wave at that intensity
-- Range value (e.g., `10->30`): Generate triangle wave changing from start to end value
+#### Linear
 
-#### Line Wave Generation
+Expresses the section's intensity value directly as a straight line.
 
-Generate lines based on section intensity values.
+- Single value: generates a flat line
+- Range value: generates a sloped line
 
-- Single value: Generate flat line
-- Range value: Generate sloped line
+#### Triangle
+
+Generates a triangle wave based on the section's intensity value. You can limit the speed of the wave with "Triangle Slope Settings".
+
+- **Min Slope (unit/sec)**: Never use a slope gentler than this
+- **Max Slope (unit/sec)**: Never use a slope steeper than this
+
+Use it when you want to avoid abrupt changes a device cannot follow.
 
 ### Text Rules
 
-Configure rules for interpreting attribute value text.
+Configure how the text attached to a `_params` value is interpreted. Add as many rules as you need, each in the form "if this text, then do this".
 
-| Rule | Description | Example |
-|------|-------------|---------|
-| valueRange | Range specification format | `10->30` |
-| waveformToggle | Waveform type switching | `triangle`, `line` |
-| signDirection | Positive/negative direction | `+`, `-` |
-
-### Slope Control
-
-Limit the slope of generated waveforms.
-
-- **minSlope**: Minimum slope (slopes below this not allowed)
-- **maxSlope**: Maximum slope (slopes above this not allowed)
-
-Use when you want to avoid sudden changes.
+| Rule | Description |
+|------|-------------|
+| Value Range | Specify the operating range (min and max) for that text |
+| Sign | Specify whether the value is output in the positive or negative direction |
+| Waveform On/Off | Generate or ignore the waveform for that text |
 
 ### Presets
 
-Save waveform generation settings as presets.
+You can save a whole set of settings, including text rules, as a preset.
 
-1. Adjust settings
-2. Click "Save Preset"
-3. Enter preset name
+- **Save**: Save under a name
+- **Delete**: Delete the selected preset
+- **Export / Import**: Exchange presets as files
 
-Saved presets can be selected later.
+Presets are remembered per column, so you can use different ones for different columns, e.g. preset A for the `intensity_params` column and preset B for the `speed_params` column.
 
-### Column Presets
+### Advanced Options
 
-Store presets individually for each column.
+| Option | Effect |
+|--------|--------|
+| Grouping | Treat consecutive sections with the same settings and intensity as one unit |
+| Phase Continuity | Continue the wave phase within a group so the waveform does not break at the boundaries |
+| Point Optimization | Reduce meaningless intermediate points to keep the output light |
 
-- Preset A for "intensity" column
-- Preset B for "speed" column
-
-Such differentiation is possible.
-
-## Section Grouping
-
-When consecutive sections have the same settings and intensity, they are automatically grouped.
-
-- Triangle wave phase continues within group
-- Empty sections split groups
-- Phase resets between groups
-
-This maintains natural waveform continuity.
+Groups are split by gap sections, and the phase is reset between groups.
 
 ## Exporting Sections
 
-Save edited section data as CSV.
+You can save the edited section data as CSV.
 
-1. Select **File > Export Section CSV**
-2. Specify filename and save
+1. Select **File > Export Section Data...** (also available from the Sections panel toolbar)
+2. The file is downloaded
 
-Filename format: `{audio filename}.{timestamp}.sections.csv`
+The filename has one of the following formats.
+
+- Normal: `{audio filename}.{timestamp}.sections.csv`
+- When opened with work information: `{circle name}-{work number}-{chapter number}.{date}.csv`
 
 ## Parameter Format
 
-This section explains the format of values entered in `_params` columns.
+This section explains the format of values entered in a `_params` column.
 
 ### Basic Format
 
@@ -201,9 +209,11 @@ This section explains the format of values entered in `_params` columns.
 ```
 
 **Examples**:
-- `30` - Intensity 30
-- `30full` - Intensity 30, text "full"
-- `70base` - Intensity 70, text "base"
+- `30` - intensity 30
+- `30全体` - intensity 30, text "全体"
+- `70根元` - intensity 70, text "根元"
+
+The intensity is clamped to the range 0-100 and normalized to 0-1 internally. If you write only text, the intensity is treated as 0.
 
 ### Changing Values
 
@@ -212,42 +222,44 @@ This section explains the format of values entered in `_params` columns.
 ```
 
 **Examples**:
-- `10->30` - Intensity changes from 10 to 30
-- `0->50full` - Intensity changes from 0 to 50, text "full"
+- `10->30` - intensity changes from 10 to 30
+- `0->50全体` - intensity changes from 0 to 50, text "全体"
 
-### Text Purpose
+### What the Text Is For
 
 The text portion is used in combination with "Text Rules".
 
-**Linear (Penis) Preset Example**:
-| Text | Range |
-|------|-------|
-| full | 0-100% |
-| tip | 70-100% |
-| shaft | 30-70% |
-| base | 0-30% |
+The built-in presets match Japanese text, so the strings below are entered exactly as shown regardless of the UI language.
 
-**Rotation Preset Example**:
+**Linear (Penis) preset example**:
+| Text | Operating range |
+|------|-----------------|
+| 全体 (whole) | 0-100% |
+| 先端 (tip) | 70-100% |
+| 軸部 (shaft) | 30-70% |
+| 根元 (base) | 0-30% |
+
+**Rotation preset example**:
 | Text | Action |
 |------|--------|
-| clockwise | Rotate in positive direction |
-| counter-clockwise | Rotate in negative direction |
+| 右回転 (clockwise) | Rotate in the positive direction |
+| 左回転 (counter-clockwise) | Rotate in the negative direction |
 
 ## Device-Specific Production Tips
 
 ### Linear Devices (A10 Piston, The Handy, etc.)
 
-- **Use simple waveforms**: Triangle waves with basic up-down motion are recommended
-- **Avoid complex shapes**: Complex waveforms can cause jerky device movement
-- **Rest position**: Initial and rest positions should be at top (value = max value)
+- **Use simple waveforms**: Up-and-down motion such as a triangle wave is the basis
+- **Avoid complex shapes**: Complex waveforms make device movement jerky
+- **Rest position**: The initial and rest positions are best at the top (value = max value)
 
 ### Vibration Devices (Anal plugs, etc.)
 
-- **Rest position**: Initial and rest positions should be at bottom (value = 0)
-- **Triangle/Sine waves**: Use for piston-like motion effects
+- **Rest position**: The initial and rest positions are best at the bottom (value = 0)
+- **Triangle / sine waves**: Use them to express piston-like motion
 
 ### Rotation Devices (Nipple machines, etc.)
 
-- **Allow negative values**: Enable "Allow Negative Values" to switch rotation direction
-- **Positive = clockwise, Negative = counter-clockwise**
+- **Allow negative values**: Enable "Allow Negative Values" to switch the direction of rotation
+- **Positive = clockwise, negative = counter-clockwise**
 - **Separate left/right control**: For nipple-focused content, setting different waveforms for left and right increases immersion

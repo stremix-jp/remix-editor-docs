@@ -1,24 +1,26 @@
 # Shortcuts
 
-Keyboard shortcuts for remix-editor.
+Keyboard shortcuts for remix-editor. The assignments listed here are the **defaults**, and almost all of them can be changed from the settings screen.
+
+> **Shortcuts marked with ※ only work while the Curve Editor panel is active.** Click the panel tab or its contents to activate it before using them.
 
 ## Basic Operations
 
 | Key | Function |
 |-----|----------|
 | Ctrl + Z | Undo |
-| Ctrl + Y | Redo |
 | Ctrl + Shift + Z | Redo |
 | Space | Play/Pause |
 
-## File Operations
+## Application
 
 | Key | Function |
 |-----|----------|
-| Ctrl + O | Import |
-| Ctrl + Shift + S | Export |
+| Ctrl + O | Import (Open Remix) |
+| Ctrl + Shift + S | Export (Save Remix) |
+| Ctrl + , | Open Settings |
 
-## Editing Operations
+## Selection ※
 
 | Key | Function |
 |-----|----------|
@@ -26,73 +28,85 @@ Keyboard shortcuts for remix-editor.
 | Ctrl + X | Cut |
 | Ctrl + V | Paste |
 | Delete | Delete |
-| Backspace | Delete |
 | Ctrl + A | Select All |
-| Escape | Deselect |
-
-## View Operations
-
-| Key | Function |
-|-----|----------|
+| Escape | Clear Selection |
 | Z | Zoom to Selection |
-| J | Jump to Playback Position |
+| E | Equalize Points |
 
-## Waveform Generation
-
-| Key | Function |
-|-----|----------|
-| W | Open Waveform Generator |
-| A | Waveform from Audio |
-
-## Pivot
+## Waveform Generation ※
 
 | Key | Function |
 |-----|----------|
-| P | Set/Clear Pivot |
-| Shift + P | Jump to Pivot |
-| Ctrl + P | Move Playback to Pivot |
+| W | Generate Waveform |
+| A | Generate from Audio |
 
-## Playback Speed
+## Playback
 
-| Key | Function |
-|-----|----------|
-| Shift + > | Increase Speed |
-| Shift + < | Decrease Speed |
+| Key | Function | Note |
+|-----|----------|------|
+| J | Jump to Playhead | ※ |
+| F | Toggle Follow Mode | ※ |
+| P | Set Pivot (adds one) | |
+| Shift + P | Jump to Next Pivot | |
+| Ctrl + Shift + P | Jump to Previous Pivot | |
+| Ctrl + P | Align Playhead to Pivot | |
+| Alt + → | Jump to Next Point | |
+| Alt + ← | Jump to Previous Point | |
+| N | Select Next Point | |
+| B | Select Previous Point | |
+| Shift + > | Increase Speed | |
+| Shift + < | Decrease Speed | |
+
+Multiple pivots can be registered, and Shift + P / Ctrl + Shift + P cycle through them in registration order.
 
 ## Section Navigation
 
 | Key | Function |
 |-----|----------|
-| Left Arrow | Previous Section |
-| Right Arrow | Next Section |
-| Shift + Left Arrow | Also Select Previous |
-| Shift + Right Arrow | Also Select Next |
+| ← | Previous Section |
+| → | Next Section |
+| Shift + ← | Extend to Previous Section |
+| Shift + → | Extend to Next Section |
+
+Section navigation by keyboard only moves the selected index; the playback position and the selection do not change. To move the playback position as well, click a row in the section table or use the toolbar buttons.
+
+## Quick Point ※
+
+| Key | Function |
+|-----|----------|
+| 1 - 9 | Add a point at the value of the nth button from the left in the quick point bar |
+
+- Only available while the quick point bar is shown (**Settings > Editor > Show Quick Point Bar**)
+- Disabled while Ctrl / Shift / Alt is held
+- These keys are fixed and cannot be changed from the settings screen
 
 ## Mouse Operations
 
 | Operation | Function |
 |-----------|----------|
-| Left Click (empty) | Add Point |
-| Left Click (on point) | Select Point |
-| Left Drag | Move Point |
-| Shift + Left Drag | Range Selection (Time Range) |
-| Ctrl + Left Drag | Rectangle Selection |
-| Right Drag | Pan Viewport |
-| Mouse Wheel | Zoom In/Out |
-| Drag within Selection | Move Selected Points |
+| Left Click (empty) | Add Point (drag straight away to move it) |
+| Left Click (on point) | Select Point (Ctrl / Shift + Click to add to the selection) |
+| Left Drag (on point) | Move Point (moves all selected points together) |
+| Shift + Left Drag | Range Select (time range; the full value range is covered) |
+| Ctrl + Left Drag | Rect Select |
+| Right Drag | Pan |
+| Mouse Wheel | Zoom centered on the cursor |
+| Right Click | Context Menu |
 | Drag Handle | Resize Selection |
-| Alt + Drag Handle | Symmetric Resize |
-| Drag Playhead Area | Change Playback Position |
+| Left Click / Drag in playhead area | Change playback position (pivots in the area can be dragged to move them) |
+
+Right drag pans even when the cursor is over a point. Wheel zoom sensitivity, pan sensitivity, and direction inversion can be adjusted in **Settings > Editor**.
 
 ## Selection Resize Details
 
 | Handle | Action |
 |--------|--------|
-| Left/Right Edges | Scale in Time Direction |
-| Top/Bottom Edges | Proportional Scale in Value Direction |
-| Corners | Tilted Scale (Trapezoid Transformation) |
-| Alt + Top/Bottom | Scale from Center |
-| Alt + Corners | Simultaneous Adjustment of Opposite Side (Symmetric) |
+| Left/Right Edges | Move the start/end of the time range |
+| Top/Bottom Edges | Shift the top/bottom value in parallel (the slope is preserved; it is not a proportional scale) |
+| Corners | Move only that corner (trapezoid transformation) |
+| Alt + Edge | Symmetric resize where the opposite side moves in the opposite direction |
+
+Only values changed by the resize are quantized; time is not quantized. Note that **Alt + Corners currently has no effect**.
 
 ## Shortcut Customization
 
@@ -102,27 +116,34 @@ Shortcuts can be customized from the settings screen.
 
 ![Shortcut Settings](./images/12-shortcuts-settings.png)
 
-1. Open **Settings**
-2. Select **Shortcuts** tab
+1. Open **Settings** (Ctrl + ,)
+2. Select the **Shortcuts** category
+
+They are grouped into the categories Basic / Selection / Waveform / Playback / Section / Application / Mouse.
 
 ### Change Key
 
-1. Click "Change" button for the item to modify
-2. Press new key
-3. Click "Save"
+1. Click the input field of the item to change (it changes to "Press a key...")
+2. Press the new key combination
+
+A warning is shown if the assignment duplicates another shortcut. "Clear" removes the assignment.
+
+### Change Mouse Operations
+
+Add Point, Zoom, Pan, Range Select, Rect Select, and Context Menu can have their button (left/right/middle) and modifier keys changed. Zoom and Pan can also be assigned to the wheel, so configurations such as "wheel to pan, drag to zoom" are possible.
 
 ### Reset to Default
 
-Reset to initial settings with each item's "Reset" button, or "Reset All to Default".
+The "Reset All" button restores every shortcut to its initial setting.
 
 ### Export/Import Settings
 
-Save and load shortcut settings as JSON file.
+Save and load shortcut settings as a JSON file.
 
-1. "Export" to save to file
-2. "Import" to load from file
+1. "Export" to save to a file
+2. "Import" to load from a file
 
-Useful for migrating settings to different environments.
+Useful for migrating settings to a different environment.
 
 ## Notes
 
@@ -131,6 +152,12 @@ Useful for migrating settings to different environments.
 During text input (pattern name editing, section editing, etc.), global shortcuts are disabled.
 
 **Exception**: Escape key exits input and returns to normal mode.
+
+### Panel Active State
+
+Shortcuts marked with ※ only work while the Curve Editor panel is active. Right after operating another panel such as the section table, click the curve editor before using them.
+
+Play/Pause, Undo/Redo, Import/Export, Settings, section navigation, pivots, and point navigation work no matter which panel is active.
 
 ### While Modal is Open
 
@@ -144,8 +171,8 @@ Some shortcuts may conflict with browser functions.
 
 | Key | Browser Function | remix-editor Behavior |
 |-----|------------------|----------------------|
-| Ctrl + S | Save Page | Disabled (use Export) |
-| Ctrl + P | Print | Assigned to Pivot function |
+| Ctrl + O | Open File | Assigned to Open Remix |
+| Ctrl + P | Print | Assigned to the pivot function |
 | F5 | Refresh Page | Works normally |
 
 **Tip**: Even if you accidentally refresh the page, auto-saved data is restored.

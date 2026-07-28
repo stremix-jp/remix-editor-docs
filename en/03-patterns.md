@@ -1,117 +1,160 @@
 # Pattern Management
 
-Control patterns define the value changes to be sent to devices. You can create multiple patterns and assign them to different devices.
+A control pattern is the data that defines the value changes sent to a device. You can create multiple patterns and assign each one to a different device.
 
 ## Basic Pattern Operations
 
-### Add a Pattern
+### Adding a Pattern
 
-1. Click the "+" button in the pattern list
-2. A new pattern will be created and automatically selected
+1. Click the "+" button in the Patterns panel
+2. A new pattern is created and selected automatically
 
-### Select a Pattern
+A new pattern contains only 2 points: the start point (time = 0, value 0) and the end point (time = max time, value 0). Colors are assigned automatically in order from the default palette.
 
-- Click a pattern to make it the editing target
+### Selecting a Pattern
+
+- Click a pattern to make it the editing target (the active pattern)
 - The selected pattern is highlighted
+- Only the active pattern can be edited in the Curve Editor
 
-### Rename a Pattern
+### Opening Pattern Settings
 
-1. Double-click the pattern name
-2. Enter the new name
-3. Press Enter to confirm, Escape to cancel
+- Click the "▶" to the left of the pattern name to expand the settings area
+- Settings such as Name, Color, and Max, along with Device Mapping, are shown here
 
-### Change Pattern Color
+### Renaming a Pattern
 
-1. Click the pattern's color icon
-2. Select a color from the color picker
-3. The color is reflected in the curve editor display
+- Type into the "Name" field in the settings area
 
-### Delete a Pattern
+### Reordering Patterns
 
-1. Click the pattern's trash icon
-2. Select "Delete" in the confirmation dialog
+- Drag the grip at the left edge of the row to reorder
 
-**Note**: Deletion cannot be undone.
+### Deleting a Pattern
 
-## Pattern Display Control
+- Hover over the row and click the trash icon that appears
 
-### Toggle Show/Hide
+There is no confirmation dialog, but you can undo with Ctrl + Z.
 
-- Click the eye icon to toggle show/hide
-- Hidden patterns are not displayed in the curve editor
-- Hidden patterns cannot be edited (a warning is displayed)
+## Show and Output Toggles
 
-### Display Multiple Patterns
+A pattern has two independent switches: **show** and **output**. They are easy to confuse, so take care.
 
-- When multiple patterns are visible, they are overlaid in the curve editor
-- Each pattern is distinguished by its set color
-- Only the selected pattern can be edited
+| Icon | Meaning | Effect |
+|------|---------|--------|
+| Power | Device output on/off | When off, the pattern's values are no longer sent to the device (the icon glows green when on) |
+| Eye | Display in the Curve Editor | When hidden, the pattern is no longer drawn on the canvas |
+
+**Important**: Hiding a pattern with the eye icon does not stop output to the device. To silence a device, turn off the power icon.
+
+- The power icon is always visible while output is off, and appears on hover while it is on
+- The eye icon appears when you hover over the row
+
+### Editing Restrictions for Hidden Patterns
+
+A hidden pattern cannot be edited. Adding points, dragging, copying, cutting, pasting, deleting, generating waveforms, and equalizing points are all blocked with a message such as "Cannot add point while waveform is hidden".
+
+### Showing Multiple Patterns at Once
+
+- When several patterns are shown, they are drawn on top of each other in the Curve Editor
+- Each pattern is distinguished by its assigned color
+- Only the active pattern can be edited
 
 ## Pattern Settings
 
-Detailed settings are available for each pattern.
+The following settings are available per pattern.
 
-### Open Settings
+### Color
 
-- Click the pattern's settings icon (gear)
+- Pick any color with the color picker
+- Next to it are 8 presets (pink, cyan, violet, blue, green, yellow, orange, red) that apply instantly when clicked
+- The color is reflected in the Curve Editor display
 
-### Maximum Value (maxValue)
+### Max (maxValue)
 
-- Sets the upper limit of pattern values
-- Default: 20
-- Values sent to devices are normalized to 0% - 100%
+- Sets the upper limit of the pattern's values
+- Default: 20 (the initial value for new patterns can be changed in Settings > Editor > Default Max Value)
+- Values sent to the device are normalized to 0% - 100%
 
-**Example**: With maxValue of 20
-- Value 10 → Sent to device as 50%
-- Value 20 → Sent to device as 100%
+**Example**: With a Max of 20
 
-### Value Step (valueStep)
+- Value 10 → sent to the device as 50%
+- Value 20 → sent to the device as 100%
 
-- Sets the quantization (snap) interval for values
-- When set, point values automatically snap to steps
+### Step (valueStep)
 
-**Example**: With valueStep of 5
-- Values snap to 0, 5, 10, 15, 20...
+- Sets the increment used to quantize (snap) values
+- Point values are aligned to this increment automatically
+
+**Example**: With a Step of 5, values snap to 0, 5, 10, 15, 20...
 
 ### Allow Negative Values
 
-- When enabled, values below 0 can be entered
-- Negative values are used for rotation direction control, etc.
+- When enabled, the pattern's minimum value (minValue) becomes `-Max`, letting you use values below 0
+- When disabled, the minimum value is 0
+- Negative values are used for things like controlling the direction of rotation
 
-### Preferred Device Type
+The minimum value is also the lower bound of the Quick Point Bar. When negative values are allowed, the Quick Point Bar buttons start from the negative side.
 
-Sets priority for automatic pattern-to-device connection.
+### Preferred Device
 
-Options:
-- **Penis**: Prioritize penis devices
-- **Anal**: Prioritize anal devices
-- **Nipple**: Prioritize nipple devices
-- **None**: No automatic connection
+The device type to prefer when automatically connecting the pattern to a device.
 
-### Preferred Actuator Type
+- Penis Device
+- Anal Device
+- Nipple Device
+- Vaginal Device
+- Clitoral Device
+- None (excluded from automatic connection)
 
-Sets the type of actuator to prioritize when connecting patterns.
+### Preferred Actuator
 
-Options:
+The actuator type to prefer when connecting the pattern.
+
+Three types are available by default.
+
 - **Vibrate**: Vibration
-- **Linear**: Linear motion
 - **Rotate**: Rotation
+- **Linear**: Linear motion (back-and-forth)
 
-### Clear Waveform
+Enabling Settings > General > Experimental Mode adds Oscillate / Constrict / Inflate / Position / Spray / Temperature / LED.
 
-- Deletes all points in the pattern
-- Start point (time=0) and end point (time=maxTime) are automatically recreated
+**Note**: If any pattern has no Preferred Actuator set, saving the Remix fails with an error and no file is written. Always set it before saving. (This error message is currently shown in Japanese regardless of the language setting.)
+
+### Reset Waveform
+
+- Deletes every intermediate point in the pattern, keeping the start and end points
+- A confirmation dialog is shown before it runs (you can undo with Ctrl + Z)
+
+## Device Mapping
+
+At the bottom of the pattern settings, the connected devices and their actuators are listed.
+
+- **Auto**: Assign automatically based on the Preferred Device and Preferred Actuator
+- **Manual**: Specify a particular actuator explicitly
+- One pattern can also be assigned to several actuators
+- Actuators already used by another pattern are greyed out
+
+See [Device Connection](./06-devices.md) for details.
+
+## Settings That Are Not Per-Pattern
+
+The following two are **editor-wide settings** and cannot be set per pattern. Change them in Settings > Editor.
+
+- **Max Time**: The length of the whole timeline (seconds)
+- **Time Step**: The minimum unit of the time axis (seconds)
+
+The only increment you can set per pattern is the one on the value axis (Step).
 
 ## Current Value Display
 
-- During playback, the current value at the playback position is displayed in the pattern list
-- You can see how much intensity is being sent to devices
+Below the pattern name, the value at the current playback position and the assigned device information are always shown, so you can check how much intensity is being sent to the device. When there is no assignment, "Not connected" is shown.
 
 ## Best Practices
 
 ### Pattern Naming
 
-Clear names make management easier.
+Clear names make patterns easier to manage.
 
 **Good examples**:
 - "Main Vibration"
@@ -120,10 +163,10 @@ Clear names make management easier.
 
 ### Color Coding
 
-- Using different colors for different roles makes it easier to distinguish patterns
-- Example: Blue for vibration, red for linear
+- Using a different color per role makes patterns easier to tell apart when several are shown
+- Example: blue for vibration, red for linear
 
 ### Number of Patterns
 
-- The number of patterns needed depends on your device configuration
-- One pattern per device is basic, but the same pattern can be sent to multiple devices
+- The number of patterns you need depends on your device configuration
+- One pattern per device is the basic approach, but the same pattern can also be sent to multiple devices
