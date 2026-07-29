@@ -102,24 +102,10 @@
   width: auto;
 }
 
-/* ---- ヘッダ下の署名罫。他の ARK の面（社内ポータル・経理）と同じ形 ---- */
-.VPNavBar {
-  position: relative;
-}
-.VPNavBar.has-sidebar .divider,
-.VPNavBar .divider {
-  background: transparent;
-}
-.VPNavBar::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #6c9eff, #6c9eff 14%, rgba(108, 158, 255, 0) 58%);
-  pointer-events: none;
-}
+/* ヘッダ下に署名のグラデ罫は置かない。
+   他の ARK の面（社内ポータル・経理）はマストヘッドが版面幅に収まっているので成立するが、
+   ここはナビとサイドバーが別々の幅を持つ 3 分割レイアウトで、罫が片側にだけ半端に出る。
+   ブランドの手がかりはヘッダのロゴが担っているので、罫は要らない。 */
 
 /* ---- 見出しは左罫。既定の上罫（border-top）はやめる ----
    ARK では節見出しの左に 3px のテーマカラーを置く。見出し自体は太字だが色は薄い。 */
