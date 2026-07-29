@@ -86,3 +86,85 @@
 .vp-doc li {
   font-feature-settings: "palt" 1;
 }
+
+/* ============================================================
+   ここから下は既定テーマのセレクタに触る。ARK の署名（ロゴ・グラデ罫・
+   見出しの左罫・下線リンク）は変数だけでは出せないため。
+   **構造は仮定しない** — 当てているのは色と罫だけで、レイアウトは動かさない。
+   VitePress の更新でクラス名が変わったら、単に効かなくなるだけで壊れはしない。
+   ============================================================ */
+
+/* ---- ロゴ。SVG は fill=currentColor なので色は CSS 側で決める ---- */
+.VPNavBarTitle .VPImage,
+.VPNavBarTitle .logo {
+  color: #6c9eff;
+  height: 22px;
+  width: auto;
+}
+
+/* ---- ヘッダ下の署名罫。他の ARK の面（社内ポータル・経理）と同じ形 ---- */
+.VPNavBar {
+  position: relative;
+}
+.VPNavBar.has-sidebar .divider,
+.VPNavBar .divider {
+  background: transparent;
+}
+.VPNavBar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6c9eff, #6c9eff 14%, rgba(108, 158, 255, 0) 58%);
+  pointer-events: none;
+}
+
+/* ---- 見出しは左罫。既定の上罫（border-top）はやめる ----
+   ARK では節見出しの左に 3px のテーマカラーを置く。見出し自体は太字だが色は薄い。 */
+.vp-doc h2 {
+  border-top: 0;
+  margin-top: 2.2rem;
+  padding-top: 0;
+  padding-left: 0.75rem;
+  border-left: 3px solid #6c9eff;
+  color: var(--vp-c-text-1);
+}
+.vp-doc h3 {
+  margin-top: 1.8rem;
+}
+
+/* ---- 本文のリンクは色の差と下線の両方で示す ----
+   青は文字に使えない（白背景で 2.63:1）ので、色は neutral の段差でつける。
+   下線は 1px 固定（太いと線そのものが図に見える）。 */
+.vp-doc a {
+  font-weight: inherit;
+  text-decoration: underline;
+  text-decoration-color: #6c9eff;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: color 0.15s;
+}
+.vp-doc a:hover {
+  text-decoration-color: #8fb4ff;
+}
+
+/* ---- サイドバーの現在地。塗らずに左罫で示す（見出しと同じ語彙） ---- */
+.VPSidebarItem.is-active > .item .link .text,
+.VPSidebarItem.is-active > .item .text {
+  color: var(--vp-c-text-1);
+  font-weight: 700;
+}
+
+/* ---- 面の角丸を ARK に寄せる（カード・コードブロック・カスタムブロック） ---- */
+.vp-doc div[class*="language-"],
+.custom-block,
+.VPFeature {
+  border-radius: 12px;
+}
+
+/* ---- 影は装飾に使わない。既定テーマの浮きを消す ---- */
+.VPFeature {
+  box-shadow: none;
+}

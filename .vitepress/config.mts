@@ -82,6 +82,9 @@ export default defineConfig({
         },
       },
     },
+    // ARK のマーク（方舟）。実体は plugins/ark-design/design/assets/ark-mark.svg の写し。
+    // fill=currentColor なので、テーマ側の色（.VPImage に当てている）で青になる。
+    logo: '/ark-mark.svg',
     socialLinks: [
       { icon: 'github', link: 'https://github.com/stremix-jp/remix-editor-docs' },
     ],

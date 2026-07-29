@@ -4,19 +4,84 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>remix-editor Documentation</title>
+    <link rel="icon" href="/favicon.svg" />
     <script>
       // ブラウザ言語で /ja/ か /en/ へ振り分ける（JS 無効時は下のリンクを表示）
       var lang = (navigator.language || 'en').toLowerCase().indexOf('ja') === 0 ? 'ja' : 'en';
       location.replace('/' + lang + '/');
     </script>
     <style>
-      body { font-family: system-ui, sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0; }
-      a { font-size: 1.25rem; margin: 0 1rem; }
+      /* この 1 枚は VitePress の外（public/ の素の HTML）なので、テーマの CSS が届かない。
+         値の出所は stremix-jp/plugins/ark-design/design/tokens.json。
+         テーマカラー #6C9EFF は**面にしか使わない**（白背景で 2.63:1）。 */
+      :root {
+        --paper: #f8f9fb;
+        --heading: #545d6d;
+        --body: #282e39;
+        --decor: #cacfd8;
+        --line: #e3e7ed;
+        --face: #6c9eff;
+        --face-hover: #8fb4ff;
+        --sans: "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体",
+          "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo,
+          system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: var(--paper);
+        color: var(--body);
+        font-family: var(--sans);
+        font-feature-settings: "palt" 0;
+        line-height: 1.9;
+      }
+      .box { padding: 1.5rem 1.25rem; text-align: center; }
+      /* ロゴが左、DIGITAL ENTERTAINMENT がその右。baseline で下端を揃える。 */
+      .brand { display: flex; align-items: baseline; justify-content: center; gap: 0.55rem; }
+      .brand > svg { flex: none; color: var(--face); display: block; }
+      .brand .de {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.26em;
+        line-height: 1;
+        color: var(--decor);
+        white-space: nowrap;
+      }
+      .rule {
+        height: 2px;
+        margin: 0.5rem 0 1.1rem;
+        background: linear-gradient(90deg, var(--face), var(--face) 35%, rgba(108, 158, 255, 0) 92%);
+      }
+      /* 見出しは太字だが色は薄い。太さと濃さを同時に上げない。 */
+      h1 { font-size: 1.1rem; font-weight: 700; color: var(--heading); margin: 0 0 0.2rem; line-height: 1.45; }
+      p { margin: 0.2rem 0 0; font-size: 0.78rem; color: var(--heading); }
+      /* リンクは色の差と 1px の下線の両方で示す（青は文字に使えない）。 */
+      a {
+        color: var(--body);
+        text-decoration: underline;
+        text-decoration-color: var(--face);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.25em;
+        font-size: 0.9rem;
+        margin: 0 0.6rem;
+      }
+      a:hover { text-decoration-color: var(--face-hover); }
     </style>
   </head>
   <body>
-    <noscript>
-      <p><a href="/ja/">日本語</a> | <a href="/en/">English</a></p>
-    </noscript>
+    <div class="box">
+      <div class="brand">
+        <svg width="81" height="15" viewBox="0 0 692.44 128.8" preserveAspectRatio="xMinYMid meet" role="img" aria-label="ARK"><g transform="translate(-52.11 -41.68)"><path fill="currentColor" fill-rule="evenodd" d="M89.40 132.73H126.70V170.02H89.40Z M214.35 48.81C167.20 48.81 128.86 86.07 126.89 132.73L163.82 132.73L163.82 129.89C163.82 110.86 179.25 95.43 198.28 95.43L201.12 95.43L201.12 132.73L163.82 132.73L163.82 170.02L233.61 170.02L233.61 48.81L214.35 48.81Z M52.11 95.43H89.40V132.73H52.11Z M283.23 170.49L362.77 45.80C365.39 41.68 371.81 42.49 373.26 47.12L411.31 170.42L386.35 170.42L380.12 150.37L336.58 150.37L350.37 128.92L373.62 129.09L362.38 92.96L313.17 170.42L283.23 170.49Z M460.92 170.42L483.23 48.41L530.12 48.41C543.64 48.41 580.04 52.01 579.17 93.00C578.29 134.00 542.97 139.88 542.97 139.88L563.94 170.42L531.41 170.25L503.62 126.58C502.10 124.19 503.73 121.04 506.57 120.98C520.66 120.67 552.76 117.35 554.96 93.66C557.64 64.92 504.16 72.07 504.16 72.07L486.06 170.42L460.92 170.42Z M642.93 48.42L620.87 170.42L646.74 170.42L652.08 141.30L673.02 120.33L705.44 170.42L733.81 170.42L690.80 102.68L744.55 48.42L712.71 48.42L659.50 101.15L669.09 48.42L642.93 48.42Z"/></g></svg>
+        <span class="de">DIGITAL ENTERTAINMENT</span>
+      </div>
+      <div class="rule"></div>
+      <h1>remix-editor ドキュメント</h1>
+      <noscript>
+        <p><a href="/ja/">日本語</a> | <a href="/en/">English</a></p>
+      </noscript>
+    </div>
   </body>
 </html>
