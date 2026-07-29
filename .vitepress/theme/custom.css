@@ -14,8 +14,12 @@
  * ブランド色だけ ARK 系に寄せ、地の色は VitePress の既定に任せている。
  */
 
-:root {
-  /* ---- 面。黒い背景は作らない ---- */
+/* **面・文字・線はライト専用**。`:root` に書くと `.dark` より後に読まれて勝ってしまい、
+   ダークにしても白背景のままになる（実際にそうなっていた）。
+   ARK 指針にはダーク側の値がまだ無い（GUIDELINES §6）ので、ダークの地は
+   VitePress の既定に任せ、こちらはブランド色だけ寄せる。 */
+html:not(.dark) {
+  /* ---- 面。ライトでは黒い背景を作らない ---- */
   --vp-c-bg: #ffffff;
   --vp-c-bg-alt: #f8f9fb;
   --vp-c-bg-soft: #f2f4f7;
@@ -31,6 +35,18 @@
   --vp-c-border: #cacfd8;
   --vp-c-gutter: #e3e7ed;
 
+  /* ---- 状態色（ライト） ---- */
+  --vp-c-tip-1: #136345;
+  --vp-c-tip-soft: #effbf6;
+  --vp-c-warning-1: #7d5208;
+  --vp-c-warning-soft: #fbf6ef;
+  --vp-c-danger-1: #c3282d;
+  --vp-c-danger-soft: #fbefef;
+}
+
+/* ここから下は**両モード共通**。ブランド色と書体はモードで変わらない
+   （ダークのブランドだけ下の .dark で明るい側へ寄せる）。 */
+:root {
   /* ---- ブランド ----
      VitePress は brand-1 をリンクなど**文字**に使う。青は文字に使えないので、
      1 と 2 は neutral の段差（本文より一段薄い → hover で本文と同じ濃さ）にし、
@@ -58,14 +74,6 @@
     "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, system-ui,
     sans-serif;
   --vp-font-family-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
-
-  /* ---- 状態色 ---- */
-  --vp-c-tip-1: #136345;
-  --vp-c-tip-soft: #effbf6;
-  --vp-c-warning-1: #7d5208;
-  --vp-c-warning-soft: #fbf6ef;
-  --vp-c-danger-1: #c3282d;
-  --vp-c-danger-soft: #fbefef;
 }
 
 /* ダークは地の色を既定に任せ、ブランドだけ寄せる。
@@ -116,6 +124,14 @@
   padding-left: 0.75rem;
   border-left: 3px solid #6c9eff;
   color: var(--vp-c-text-1);
+}
+/* アンカー（#）は既定テーマが h2 の padding-top（24px）に合わせて top を下げている。
+   上罫をやめて padding-top を 0 にしたので、追従させないと # だけ下に取り残される。
+   横も既定の -0.87em のままだと、足した左罫（3px）と padding（.75rem）のぶん
+   見出しに寄って罫と重なるので、その分さらに左へ逃がす。 */
+.vp-doc h2 .header-anchor {
+  top: 0;
+  margin-left: -1.55em;
 }
 .vp-doc h3 {
   margin-top: 1.8rem;
