@@ -1,0 +1,88 @@
+/* ARK DIGITAL ENTERTAINMENT の見た目を VitePress 既定テーマへ被せる。
+ *
+ * **値の出所は stremix-jp/plugins/ark-design/design/tokens.json（SSOT）。**
+ * 規則と、なぜその値なのかは同じディレクトリの GUIDELINES.md。色を足す・変えるときは先に読む:
+ *   1. テーマカラー #6C9EFF は**面にしか使わない**（白背景で 2.63:1。文字にも線にも使えない）
+ *   2. 青は 400 が上限。**濃くしない**。hover は薄い方へ
+ *   3. 太字にするなら色を薄く。**真っ黒かつ太字は作らない**
+ *
+ * ここは**変数の上書きだけ**にする。既定テーマのセレクタを直接叩くと、VitePress の
+ * 更新で静かに壊れる（構造は向こうの都合で変わる）。
+ *
+ * ダークモードは残す。ARK 指針にダークの値はまだ無い（GUIDELINES §6）が、これは
+ * public のユーザードキュメントで、読み手が自分で選ぶ機能なので落とさない。
+ * ブランド色だけ ARK 系に寄せ、地の色は VitePress の既定に任せている。
+ */
+
+:root {
+  /* ---- 面。黒い背景は作らない ---- */
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #f8f9fb;
+  --vp-c-bg-soft: #f2f4f7;
+  --vp-c-bg-elv: #ffffff;
+
+  /* ---- 文字。neutral-500 以上だけが文字に使える ---- */
+  --vp-c-text-1: #282e39;
+  --vp-c-text-2: #6b7385;
+  --vp-c-text-3: #9ea5b3;
+
+  /* ---- 線。装飾の罫線と操作部品の枠を分ける ---- */
+  --vp-c-divider: #e3e7ed;
+  --vp-c-border: #cacfd8;
+  --vp-c-gutter: #e3e7ed;
+
+  /* ---- ブランド ----
+     VitePress は brand-1 をリンクなど**文字**に使う。青は文字に使えないので、
+     1 と 2 は neutral の段差（本文より一段薄い → hover で本文と同じ濃さ）にし、
+     実際のテーマカラーは面に使う 3 と soft だけに置く。 */
+  --vp-c-brand-1: #545d6d;
+  --vp-c-brand-2: #282e39;
+  --vp-c-brand-3: #6c9eff;
+  --vp-c-brand-soft: #ebf1ff;
+
+  /* ---- ボタン。面はテーマカラー、文字は白。hover は薄い方へ ---- */
+  --vp-button-brand-bg: #6c9eff;
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-bg: #8fb4ff;
+  --vp-button-brand-hover-text: #ffffff;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-active-bg: #6c9eff;
+  --vp-button-brand-active-text: #ffffff;
+  --vp-button-brand-active-border: transparent;
+
+  /* ---- 書体 ----
+     **游ゴシックは Windows で Regular が細すぎる**のでスタック先頭に Medium を置く。
+     600 を持たないため、太さは 400 と 700 の 2 段だけを使う。 */
+  --vp-font-family-base: "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体",
+    "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, system-ui,
+    sans-serif;
+  --vp-font-family-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  /* ---- 状態色 ---- */
+  --vp-c-tip-1: #136345;
+  --vp-c-tip-soft: #effbf6;
+  --vp-c-warning-1: #7d5208;
+  --vp-c-warning-soft: #fbf6ef;
+  --vp-c-danger-1: #c3282d;
+  --vp-c-danger-soft: #fbefef;
+}
+
+/* ダークは地の色を既定に任せ、ブランドだけ寄せる。
+   暗い面の上では薄い青の方が見えるので、1 と 2 を明るい側に置く。 */
+.dark {
+  --vp-c-brand-1: #8fb4ff;
+  --vp-c-brand-2: #b8cfff;
+  --vp-c-brand-3: #6c9eff;
+  --vp-c-brand-soft: rgba(108, 158, 255, 0.16);
+}
+
+/* 約物の詰めは切る。見出しと短い説明が多い面で palt が効くと、中点・句点・括弧が
+   隣の字に食い込んで潰れる。長文の本文だけは既定に戻す。 */
+:root {
+  font-feature-settings: "palt" 0;
+}
+.vp-doc p,
+.vp-doc li {
+  font-feature-settings: "palt" 1;
+}
