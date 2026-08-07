@@ -31,7 +31,7 @@ export default defineConfig({
   },
   cleanUrls: true,
   lastUpdated: true,
-  head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
+  head: [['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }]],
   locales: {
     ja: {
       label: '日本語',
