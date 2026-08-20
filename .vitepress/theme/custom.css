@@ -1,172 +1,169 @@
-/* ARK DIGITAL ENTERTAINMENT の見た目を VitePress 既定テーマへ被せる。
+/* すとりみっくす！サービスデザインを VitePress 既定テーマへ被せる。
  *
- * **値の出所は stremix-jp/plugins/ark-design/design/tokens.json（SSOT）。**
- * 規則と、なぜその値なのかは同じディレクトリの GUIDELINES.md。色を足す・変えるときは先に読む:
- *   1. テーマカラー #6C9EFF は**面にしか使わない**（白背景で 2.63:1。文字にも線にも使えない）
- *   2. 青は 400 が上限。**濃くしない**。hover は薄い方へ
- *   3. 太字にするなら色を薄く。**真っ黒かつ太字は作らない**
+ * **値の出所は stremix-ui/src/theme/theme.css（SSOT）。**
+ * 規則と理由は stremix-design plugin の GUIDELINES.md。要点:
+ *   1. ページ・シェルの地は灰（surface-base）。白は注目面（コンテンツ・カード）だけ
+ *   2. brand は var(--brand-*) 参照のみ。dark では沈んだ値に切り替わる（hex 直書き禁止）
+ *   3. 面ファミリーは light ↔ dark 1対1
+ *      （白 #ffffff ↔ oklch(0.335 0.025 292) / 地 #f2f2f2 ↔ #2b2937）
+ * ここは静的ドキュメントサイトなので Tailwind を通さず、トークン値を CSS 変数として
+ * 複製している（複製先はこのファイルのみ。値を変えるときは SSOT を先に見る）。
  *
- * ここは**変数の上書きだけ**にする。既定テーマのセレクタを直接叩くと、VitePress の
- * 更新で静かに壊れる（構造は向こうの都合で変わる）。
- *
- * ダークモードは残す。ARK 指針にダークの値はまだ無い（GUIDELINES §6）が、これは
- * public のユーザードキュメントで、読み手が自分で選ぶ機能なので落とさない。
- * ブランド色だけ ARK 系に寄せ、地の色は VitePress の既定に任せている。
+ * VitePress のダークモードは html.dark 切替で、stremix-ui の .dark 規約と同じ。
+ * 原則は**変数の上書き**。既定テーマのセレクタを直接叩くのは、署名要素
+ * （ロゴ・グラデ罫・下線リンク）だけに限定する。
  */
 
-/* **面・文字・線はライト専用**。`:root` に書くと `.dark` より後に読まれて勝ってしまい、
-   ダークにしても白背景のままになる（実際にそうなっていた）。
-   ARK 指針にはダーク側の値がまだ無い（GUIDELINES §6）ので、ダークの地は
-   VitePress の既定に任せ、こちらはブランド色だけ寄せる。 */
-html:not(.dark) {
-  /* ---- 面。ライトでは黒い背景を作らない ---- */
-  --vp-c-bg: #ffffff;
-  --vp-c-bg-alt: #f8f9fb;
-  --vp-c-bg-soft: #f2f4f7;
-  --vp-c-bg-elv: #ffffff;
-
-  /* ---- 文字。neutral-500 以上だけが文字に使える ---- */
-  --vp-c-text-1: #282e39;
-  --vp-c-text-2: #6b7385;
-  --vp-c-text-3: #9ea5b3;
-
-  /* ---- 線。装飾の罫線と操作部品の枠を分ける ---- */
-  --vp-c-divider: #e3e7ed;
-  --vp-c-border: #cacfd8;
-  --vp-c-gutter: #e3e7ed;
-
-  /* ---- 状態色（ライト） ---- */
-  --vp-c-tip-1: #136345;
-  --vp-c-tip-soft: #effbf6;
-  --vp-c-warning-1: #7d5208;
-  --vp-c-warning-soft: #fbf6ef;
-  --vp-c-danger-1: #c3282d;
-  --vp-c-danger-soft: #fbefef;
+/* ---- stremix トークン（light）。brand は下の .dark で沈む ---- */
+:root {
+  --stx-radius: 0.625rem;
+  --brand-from: #7ab8fc;
+  --brand-to: #f687b3;
+  --brand-pink-from: #de78a2;
+  --brand-pink-to: #f7d8b0;
+  --brand: #99acea;
+  --brand-pink: #de78a2;
+  --brand-violet: #8fa5d9;
+}
+.dark {
+  --brand-from: #4f83bc;
+  --brand-to: #b65a80;
+  --brand-pink-from: #a45073;
+  --brand-pink-to: #b49a79;
+  --brand: #6a7aad;
+  --brand-pink: #a45073;
+  --brand-violet: #8763c0;
 }
 
-/* ここから下は**両モード共通**。ブランド色と書体はモードで変わらない
-   （ダークのブランドだけ下の .dark で明るい側へ寄せる）。 */
-:root {
-  /* ---- ブランド ----
-     VitePress は brand-1 をリンクなど**文字**に使う。青は文字に使えないので、
-     1 と 2 は neutral の段差（本文より一段薄い → hover で本文と同じ濃さ）にし、
-     実際のテーマカラーは面に使う 3 と soft だけに置く。 */
-  --vp-c-brand-1: #545d6d;
-  --vp-c-brand-2: #282e39;
-  --vp-c-brand-3: #6c9eff;
-  --vp-c-brand-soft: #ebf1ff;
+/* ---- 面・文字・線（light） ----
+ * コンテンツ（--vp-c-bg）とヘッダーは白ファミリー、サイドバー（--vp-c-bg-alt）と
+ * コードブロック等（--vp-c-bg-soft）は地ファミリー。灰の地に白い版面が浮く構図。 */
+html:not(.dark) {
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #f2f2f2;
+  --vp-c-bg-soft: #f2f2f2;
+  --vp-c-bg-elv: #ffffff;
 
-  /* ---- ボタン。面はテーマカラー、文字は白。hover は薄い方へ ---- */
-  --vp-button-brand-bg: #6c9eff;
+  --vp-c-text-1: oklch(0.35 0 0);
+  --vp-c-text-2: oklch(0.556 0 0);
+  --vp-c-text-3: oklch(0.65 0 0);
+
+  --vp-c-divider: oklch(0.9 0 0);
+  --vp-c-border: oklch(0.85 0 0);
+  --vp-c-gutter: oklch(0.9 0 0);
+}
+
+/* ---- 面・文字・線（dark）。light の面ファミリーと 1 対 1 ---- */
+.dark {
+  --vp-c-bg: oklch(0.335 0.025 292);
+  --vp-c-bg-alt: #2b2937;
+  --vp-c-bg-soft: #2b2937;
+  --vp-c-bg-elv: oklch(0.335 0.025 292);
+
+  --vp-c-text-1: oklch(0.985 0 0);
+  --vp-c-text-2: oklch(0.72 0.02 292);
+  --vp-c-text-3: oklch(0.6 0.02 292);
+
+  --vp-c-divider: oklch(1 0 0 / 15%);
+  --vp-c-border: oklch(1 0 0 / 20%);
+  --vp-c-gutter: oklch(1 0 0 / 15%);
+}
+
+/* ---- ブランド ----
+ * VitePress は brand-1 を強調文字・現在地・検索ハイライトに使う。
+ * brand そのままでは白地で薄すぎるので、文字用途の 1/2 だけ本文色へ寄せて
+ * コントラストを確保する（面用途の 3/soft は brand をそのまま使う）。 */
+:root {
+  --vp-c-brand-1: color-mix(in oklab, var(--brand) 55%, var(--vp-c-text-1));
+  --vp-c-brand-2: color-mix(in oklab, var(--brand) 40%, var(--vp-c-text-1));
+  --vp-c-brand-3: var(--brand);
+  --vp-c-brand-soft: color-mix(in oklab, var(--brand) 14%, transparent);
+
+  /* ボタン。面は brand、文字は白（Button appearance=brand の読み替え） */
+  --vp-button-brand-bg: var(--brand);
   --vp-button-brand-text: #ffffff;
   --vp-button-brand-border: transparent;
-  --vp-button-brand-hover-bg: #8fb4ff;
+  --vp-button-brand-hover-bg: color-mix(in oklab, var(--brand) 85%, #ffffff);
   --vp-button-brand-hover-text: #ffffff;
   --vp-button-brand-hover-border: transparent;
-  --vp-button-brand-active-bg: #6c9eff;
+  --vp-button-brand-active-bg: var(--brand);
   --vp-button-brand-active-text: #ffffff;
   --vp-button-brand-active-border: transparent;
 
-  /* ---- 書体 ----
-     **游ゴシックは Windows で Regular が細すぎる**のでスタック先頭に Medium を置く。
-     600 を持たないため、太さは 400 と 700 の 2 段だけを使う。 */
-  --vp-font-family-base: "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体",
-    "Yu Gothic UI", "Yu Gothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, system-ui,
-    sans-serif;
+  /* ---- 書体。stremix は Inter（和文は Hiragino / Yu Gothic UI へフォールバック） ---- */
+  --vp-font-family-base: "Inter Variable", "Inter", ui-sans-serif, system-ui,
+    "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", Meiryo, sans-serif;
   --vp-font-family-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 }
 
-/* ダークは地の色を既定に任せ、ブランドだけ寄せる。
-   暗い面の上では薄い青の方が見えるので、1 と 2 を明るい側に置く。 */
-.dark {
-  --vp-c-brand-1: #8fb4ff;
-  --vp-c-brand-2: #b8cfff;
-  --vp-c-brand-3: #6c9eff;
-  --vp-c-brand-soft: rgba(108, 158, 255, 0.16);
-}
-
-/* 約物の詰めは切る。見出しと短い説明が多い面で palt が効くと、中点・句点・括弧が
-   隣の字に食い込んで潰れる。長文の本文だけは既定に戻す。 */
-:root {
-  font-feature-settings: "palt" 0;
-}
-.vp-doc p,
-.vp-doc li {
-  font-feature-settings: "palt" 1;
-}
-
 /* ============================================================
-   ここから下は既定テーマのセレクタに触る。ARK の署名（ロゴ・グラデ罫・
-   見出しの左罫・下線リンク）は変数だけでは出せないため。
-   **構造は仮定しない** — 当てているのは色と罫だけで、レイアウトは動かさない。
-   VitePress の更新でクラス名が変わったら、単に効かなくなるだけで壊れはしない。
-   ============================================================ */
+ * ここから下は既定テーマのセレクタに触る（stremix の署名要素）。
+ * 当てているのは色と罫だけで、レイアウトは動かさない。
+ * ============================================================ */
 
-/* ---- ロゴ。SVG は fill=currentColor なので色は CSS 側で決める ---- */
+/* ---- ロゴ。light/dark の 2 枚構成（config.mts 側で切替）。高さだけ揃える。
+ * ワードマークが横長なので、サイドバー幅にサイト名と同居できる高さに抑える。 */
 .VPNavBarTitle .VPImage,
 .VPNavBarTitle .logo {
-  color: #6c9eff;
-  height: 22px;
+  height: 18px;
   width: auto;
 }
 
-/* ヘッダ下に署名のグラデ罫は置かない。
-   他の ARK の面（社内ポータル・経理）はマストヘッドが版面幅に収まっているので成立するが、
-   ここはナビとサイドバーが別々の幅を持つ 3 分割レイアウトで、罫が片側にだけ半端に出る。
-   ブランドの手がかりはヘッダのロゴが担っているので、罫は要らない。 */
-
-/* ---- 見出しは左罫。既定の上罫（border-top）はやめる ----
-   ARK では節見出しの左に 3px のテーマカラーを置く。見出し自体は太字だが色は薄い。 */
+/* ---- 見出し。左に brand グラデの縦バー（ark-pages Remix 制作ガイドと同じ語彙） ---- */
 .vp-doc h2 {
-  border-top: 0;
-  margin-top: 2.2rem;
-  padding-top: 0;
-  padding-left: 0.75rem;
-  border-left: 3px solid #6c9eff;
-  color: var(--vp-c-text-1);
+  position: relative;
+  padding-left: 0.85rem;
 }
-/* アンカー（#）は既定テーマが h2 の padding-top（24px）に合わせて top を下げている。
-   上罫をやめて padding-top を 0 にしたので、追従させないと # だけ下に取り残される。
-   横も既定の -0.87em のままだと、足した左罫（3px）と padding（.75rem）のぶん
-   見出しに寄って罫と重なるので、その分さらに左へ逃がす。 */
+.vp-doc h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(24px + 0.22em); /* 既定テーマの padding-top(24px) + 行内の目視調整 */
+  width: 5px;
+  height: 1.05em;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--brand-from), var(--brand-to));
+}
+/* アンカー（#）は足した padding-left のぶん左へ逃がす */
 .vp-doc h2 .header-anchor {
-  top: 0;
-  margin-left: -1.55em;
-}
-.vp-doc h3 {
-  margin-top: 1.8rem;
+  margin-left: -1.6em;
 }
 
-/* ---- 本文のリンクは色の差と下線の両方で示す ----
-   青は文字に使えない（白背景で 2.63:1）ので、色は neutral の段差でつける。
-   下線は 1px 固定（太いと線そのものが図に見える）。 */
+/* ---- 本文リンク。文字色は本文のまま、brand の下線で示す（hover で太く） ---- */
 .vp-doc a {
   font-weight: inherit;
+  color: var(--vp-c-text-1);
   text-decoration: underline;
-  text-decoration-color: #6c9eff;
+  text-decoration-color: var(--brand);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.25em;
-  transition: color 0.15s;
 }
 .vp-doc a:hover {
-  text-decoration-color: #8fb4ff;
+  color: var(--vp-c-text-1);
+  text-decoration-thickness: 2px;
 }
 
-/* ---- サイドバーの現在地。塗らずに左罫で示す（見出しと同じ語彙） ---- */
+/* ---- サイドバーの現在地。塗らずに太字で示す ---- */
 .VPSidebarItem.is-active > .item .link .text,
 .VPSidebarItem.is-active > .item .text {
   color: var(--vp-c-text-1);
   font-weight: 700;
 }
 
-/* ---- 面の角丸を ARK に寄せる（カード・コードブロック・カスタムブロック） ---- */
+/* ---- 面の角丸を stremix に寄せる（radius-xl = radius + 4px） ---- */
 .vp-doc div[class*="language-"],
 .custom-block,
 .VPFeature {
-  border-radius: 12px;
+  border-radius: calc(var(--stx-radius) + 4px);
 }
 
-/* ---- 影は装飾に使わない。既定テーマの浮きを消す ---- */
+/* ---- 影は装飾に使わない ---- */
 .VPFeature {
   box-shadow: none;
+}
+
+/* ---- 画像（スクリーンショット）。白い版面上で境界が消えないよう薄い枠と角丸 ---- */
+.vp-doc img {
+  border-radius: calc(var(--stx-radius) + 4px);
+  border: 1px solid var(--vp-c-divider);
 }
