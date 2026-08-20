@@ -14,7 +14,7 @@ The chapters are ordered from the most frequently used features.
 6. [Curve Editor](./06-curve-editor.md) - Adding, moving, and selecting points, and pivots
 7. [Properties](./07-properties.md) - Editing point coordinates numerically
 8. [Section Data](./08-sections.md) - Reviewing transcripts, notes, and navigation
-9. [Waveform Generation](./09-waveform-generation.md) - Bulk generation of strokes such as triangle waves (a primary production tool)
+9. [Waveform Generation](./09-waveform-generation.md) - Bulk generation of waveforms such as triangle waves
 10. [Waveform Library](./10-waveform-library.md) - Saving and reusing waveform snippets
 11. [Shortcuts](./11-shortcuts.md) - Keyboard shortcut reference
 12. [FAQ](./12-faq.md) - Frequently asked questions

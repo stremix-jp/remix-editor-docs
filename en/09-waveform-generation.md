@@ -1,6 +1,6 @@
 # Waveform Generation
 
-Generates waveforms such as triangle waves across the selected time range in one go. Since strokes in action segments are almost always triangle waves, the **Waveform Generation panel is a primary production tool**. Audio-based and section-based generation are supplementary features.
+Generates waveforms such as triangle waves across the selected time range in one go.
 
 There are 3 generation methods.
 
