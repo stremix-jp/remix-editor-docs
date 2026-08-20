@@ -102,10 +102,11 @@ html:not(.dark) {
  * ============================================================ */
 
 /* ---- ロゴ。light/dark の 2 枚構成（config.mts 側で切替）。高さだけ揃える。
- * ワードマークが横長なので、サイドバー幅にサイト名と同居できる高さに抑える。 */
+ * public/ の 2 枚は stremix-ui registry のロゴから BETA バッジを除いた派生
+ * （2026-08-21 オーナー指示。ワードマーク部分は同一）。 */
 .VPNavBarTitle .VPImage,
 .VPNavBarTitle .logo {
-  height: 18px;
+  height: 20px;
   width: auto;
 }
 
