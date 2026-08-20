@@ -4,16 +4,20 @@ remix-editor is a web application for visually editing value changes along a tim
 
 ## Table of Contents
 
+The chapters are ordered from the most frequently used features.
+
 1. [Getting Started](./01-getting-started.md) - Basic usage and workflow
-2. [UI Overview](./02-ui-overview.md) - Panels and layout
-3. [Pattern Management](./03-patterns.md) - Creating and editing control patterns
-4. [Curve Editing](./04-curve-editing.md) - Adding, moving, and deleting points
-5. [Sections](./05-sections.md) - Managing section data
-6. [Device Connection](./06-devices.md) - Integration with Intiface
-7. [Playback](./07-playback.md) - Audio playback and preview
-8. [File Operations](./08-file-operations.md) - Import and export
-9. [Shortcuts](./09-shortcuts.md) - Keyboard shortcut reference
-10. [FAQ](./10-faq.md) - Frequently asked questions
+2. [Display and Layout](./02-display-layout.md) - Map of the screen, panel arrangement, and the playback footer
+3. [Patterns](./03-patterns.md) - Creating and configuring control patterns
+4. [Import and Save](./04-import-save.md) - Loading and saving files (local / CMS)
+5. [Devices](./05-devices.md) - Integration with Intiface and mapping
+6. [Curve Editor](./06-curve-editor.md) - Adding, moving, and selecting points, and pivots
+7. [Properties](./07-properties.md) - Editing point coordinates numerically
+8. [Section Data](./08-sections.md) - Reviewing transcripts, notes, and navigation
+9. [Waveform Generation](./09-waveform-generation.md) - Automatic waveform generation (supporting feature)
+10. [Waveform Library](./10-waveform-library.md) - Saving and reusing waveform snippets
+11. [Shortcuts](./11-shortcuts.md) - Keyboard shortcut reference
+12. [FAQ](./12-faq.md) - Frequently asked questions
 
 ## Requirements
 

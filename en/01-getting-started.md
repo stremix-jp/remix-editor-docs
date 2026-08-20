@@ -27,25 +27,17 @@ Supported formats: MP3, WAV, M4A, OGG, FLAC, AAC
 
 If the loaded audio length differs from the Remix max time by 3 seconds or more, the "Adjust Remix Length" dialog appears. You can extend or shorten the max time to match the audio (when shortening, the number of points that will be deleted is shown as a warning).
 
+See [Import and Save](./04-import-save.md) for details.
+
 ### 2. Create a Pattern
 
 1. Click the "+" button in the **Patterns** panel
 2. A new pattern is created and selected automatically
 3. Rename the pattern in the "Name" field of its settings
 
-See [Pattern Management](./03-patterns.md) for details.
+See [Patterns](./03-patterns.md) for details.
 
-### 3. Edit the Curve
-
-1. Click in the **Curve Editor** to add points
-2. Drag points to move them
-3. Select multiple points for batch editing
-
-If you want to tap points in time with the music while playing, the **Quick Point Bar** at the top of the Curve Editor (number keys 1-9) is convenient.
-
-See [Curve Editing](./04-curve-editing.md) for details.
-
-### 4. Connect a Device (Optional)
+### 3. Connect a Device (Optional)
 
 1. Launch [Intiface Central](https://intiface.com/central/)
 2. Connect from the **Devices** panel in remix-editor, or from **Device > Connect...** in the menu
@@ -53,7 +45,17 @@ See [Curve Editing](./04-curve-editing.md) for details.
 
 Auto Connect is enabled by default, so if you start Intiface Central first, remix-editor connects automatically right after launch.
 
-See [Device Connection](./06-devices.md) for details.
+See [Devices](./05-devices.md) for details.
+
+### 4. Edit the Curve
+
+1. Click in the **Curve Editor** to add points
+2. Drag points to move them
+3. Select multiple points for batch editing
+
+If you want to tap points in time with the music while playing, the **Quick Point Bar** at the top of the Curve Editor (number keys 1-9) is convenient.
+
+See [Curve Editor](./06-curve-editor.md) for details.
 
 ### 5. Play and Preview
 
@@ -61,16 +63,16 @@ See [Device Connection](./06-devices.md) for details.
 2. If devices are connected, they are controlled in real time
 3. Playback speed can be changed between 0.25x and 2x
 
-See [Playback](./07-playback.md) for details.
+The playback controls are gathered in the footer at the bottom of the screen. See [Display and Layout > Footer](./02-display-layout.md#footer-playback-controls) for details.
 
-### 6. Save the File
+### 6. Save
 
-1. Select **File > Save Remix...** (Ctrl + Shift + S) from the menu
-2. A `.remix.json` file is downloaded
+There are two saving systems.
 
-The filename format is `{audio filename}.{timestamp}.remix.json`.
+- **Save locally as a file**: Select **File > Save Remix...** (Ctrl + Shift + S) from the menu to download a `.remix.json` file
+- **Save directly to the CMS**: When the editor is opened via a dedicated URL issued by the CMS, the "Save" button on screen saves your edits directly to the server
 
-See [File Operations](./08-file-operations.md) for details.
+See [Import and Save](./04-import-save.md) for details.
 
 ## About Auto-Save
 
@@ -79,12 +81,12 @@ remix-editor has no concept of "saving a document". Your edits are **always save
 - Patterns, sections, settings, and layout are stored in the browser's local storage
 - Loaded audio is stored in IndexedDB and restored automatically the next time you visit
 
-**Note**: Audio larger than the audio cache limit (default 50MB) is not cached. Only the audio is lost when you reload the page, so if you work with large audio files, raise the limit in Settings > General > Media Cache.
+**Note**: Audio larger than the audio cache limit (default 50MB) is not cached. Only the audio is lost when you reload the page, so if you work with large audio files, adjust the limit in Settings > General > Media Cache.
 
 Auto-save is only temporary storage inside the browser. To keep your work for sure, export it as a file with **File > Save Remix...**.
 
 ## Next Steps
 
-- [UI Overview](./02-ui-overview.md) - Learn about each panel
-- [Curve Editing](./04-curve-editing.md) - Learn editing features in detail
-- [Shortcuts](./09-shortcuts.md) - Learn efficient operation methods
+- [Display and Layout](./02-display-layout.md) - Map of the screen and panel arrangement
+- [Curve Editor](./06-curve-editor.md) - Learn editing features in detail
+- [Shortcuts](./11-shortcuts.md) - Learn efficient operation methods

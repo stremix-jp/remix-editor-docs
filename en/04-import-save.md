@@ -1,6 +1,17 @@
-# File Operations
+# Import & Save
 
-remix-editor supports multiple file formats.
+remix-editor supports multiple file formats. This chapter gives an overview of loading and saving files.
+
+## The Two Save Systems
+
+"Saving" in remix-editor has two independent systems.
+
+| System | Operation | Destination | When to use |
+|--------|-----------|-------------|-------------|
+| **Local save** | File > Save Remix... (Ctrl + Shift + S) | Downloaded as a `.remix.json` file | Keeping a file on hand, sharing, backing up |
+| **Direct save to the CMS** | The floating "Save" button on screen | The CMS (server) | When working via a dedicated URL issued by the CMS |
+
+In addition, there is [Auto-Save](#auto-save), which continuously records your edits in the browser — but that is only a temporary record of your working state, separate from the two "saves" above.
 
 ## File Menu
 
@@ -18,9 +29,38 @@ remix-editor supports multiple file formats.
 | Import Waveform Library... | - | Load `.wavelib.json` |
 | Export Waveform Library... | - | Download the waveform library |
 
-"Save" means a browser download. It does not update a document on the server (except for [Backend Integration](#backend-integration)).
-
 ## Import
+
+### Audio Files
+
+You can load audio in any of the following ways.
+
+- Drag and drop onto the media drop zone in the footer (dropping anywhere on the application also works)
+- Click the media drop zone and select a file
+- **File > Load Audio...**
+
+| Format | Extension |
+|--------|-----------|
+| MP3 | .mp3 |
+| WAV | .wav |
+| M4A | .m4a |
+| OGG | .ogg |
+| FLAC | .flac |
+| AAC | .aac |
+| WebM | .webm |
+
+**The file size limit is 100MB.** Larger files show "File too large (max 100MB)" and are not loaded.
+
+Loaded audio is stored in the browser (IndexedDB) and automatically restored on next launch. However, files larger than **Settings > General > Audio Cache Limit** (default 50MB) are not stored and disappear on reload. Setting the limit to `0` disables the cache (it does not mean unlimited).
+
+#### Adjusting the Remix Length
+
+If the loaded audio length and the Remix max time differ by 3 seconds or more, the "Adjust Remix Length" dialog appears.
+
+- **Adjust**: extends/shortens the max time to match the audio length
+- **Don't Adjust**: keeps the current max time
+
+When shortening, the number of points that will be deleted is shown as a warning.
 
 ### Remix JSON
 
@@ -103,18 +143,11 @@ The bottom of the dialog shows how many points will be generated ("N points will
 
 ### Section CSV
 
-Import section data.
-
-See [Sections](./05-sections.md) for details.
+Import section data. See [Sections](./08-sections.md) for details.
 
 ### Waveform Library
 
-The library of saved waveform snippets can be exchanged as a file.
-
-- **File > Import Waveform Library...** (`.wavelib.json` / `.json`)
-- **File > Export Waveform Library...** (downloads as `waveform-library.wavelib.json`)
-
-The same operations are available from the Waveform Library panel menu.
+The library of saved waveform snippets can be exchanged as a file. See [Waveform Library](./10-waveform-library.md) for details.
 
 ### Drag and Drop
 
@@ -127,11 +160,13 @@ Dragging and dropping a file anywhere on the application detects the file format
 | .csv | CSV import dialog |
 | .mp3, .wav, etc. | Audio file load |
 
-## Export
+## Local Save (File Download)
+
+This "save" is performed as a browser download.
 
 ### Remix JSON
 
-Export in remix-editor's standard format.
+Save in remix-editor's standard format.
 
 **Steps**:
 1. Select **File > Save Remix...** (Ctrl + Shift + S)
@@ -149,20 +184,18 @@ When no audio is loaded, the filename becomes `untitled.{timestamp}.remix.json`.
 - All point data
 - Pivots
 
-**When export is not possible**:
+**When saving is not possible**:
 
 | Situation | Message shown |
 |-----------|---------------|
-| No patterns at all | エクスポートするパターンがありません (There are no patterns to export) |
-| A pattern has no Preferred Actuator set | 優先アクチュエータータイプが未設定のパターンがあります: {pattern name} (Some patterns have no preferred actuator type set) |
+| No patterns at all | There are no patterns to export |
+| A pattern has no Preferred Actuator set | Some patterns have no preferred actuator type set: {pattern name} |
 
-> These export error messages are hardcoded and **appear in Japanese regardless of the language setting**.
-
-In these cases no download occurs. Set Preferred Actuator in the pattern settings and run the export again.
+In these cases no download occurs. Set Preferred Actuator in the pattern settings and run the save again.
 
 ### Section CSV
 
-Export section data as CSV.
+Download section data as CSV.
 
 **Steps**:
 1. Select **File > Export Section Data...** (also available from the section table toolbar)
@@ -178,6 +211,14 @@ Export section data as CSV.
 Gap sections are not exported.
 
 **Format**: RFC 4180 compliant (proper escaping)
+
+## Direct Save to the CMS
+
+When remix-editor is opened with a URL issued from the CMS or similar (`?token=...&workId=...&chapterId=...`), audio, section data, and Remix data are loaded automatically from the backend. After loading, the parameters are removed from the URL.
+
+Only when the token permissions and the parameter conditions are satisfied, a floating "Save" button — which can be dragged around the screen — appears, allowing the edits to be saved directly to the CMS (backend) (Save / Saving... / Saved / Failed to save). In this case no file download occurs; the data on the server is updated.
+
+When opened without a token, the editor runs in fully local mode and no backend-related UI is shown at all. There is no login feature.
 
 ## Auto-Save
 
@@ -199,7 +240,7 @@ remix-editor has no concept of "saving a document" — edits are always auto-sav
 
 Saved data is automatically restored on next launch.
 
-Audio files larger than **Settings > General > Audio Cache Limit** (default 50MB) are not stored. See [Playback](./07-playback.md) for details.
+Audio files larger than **Settings > General > Audio Cache Limit** (default 50MB) are not stored.
 
 ## Data Management
 
@@ -221,14 +262,6 @@ Data can be deleted per category from **Settings > General > Data Management**.
 3. Execute in the confirmation dialog
 
 **Note**: This operation cannot be undone. The page reloads automatically after clearing. Export necessary data beforehand.
-
-## Backend Integration
-
-When remix-editor is opened with a URL issued from the CMS or similar (`?token=...&workId=...&chapterId=...`), audio, section data, and Remix data are loaded automatically from the backend. After loading, the parameters are removed from the URL.
-
-Only when the token permissions and the parameter conditions are satisfied, a floating "Save" button — which can be dragged around the screen — appears, allowing the edits to be saved to the backend (Save / Saving... / Saved / Failed to save).
-
-When opened without a token, the editor runs in fully local mode and no backend-related UI is shown at all. There is no login feature.
 
 ## v1 File Compatibility
 
@@ -269,9 +302,9 @@ We recommend regularly exporting important work.
 2. Confirm the file is not corrupted
 3. Try another file
 
-### Cannot Export
+### Cannot Save (Export)
 
-Export is blocked while any pattern has no Preferred Actuator set. Set Preferred Actuator in the pattern settings.
+Saving is blocked while any pattern has no Preferred Actuator set. Set Preferred Actuator in the pattern settings.
 
 ### Exported File Won't Open
 

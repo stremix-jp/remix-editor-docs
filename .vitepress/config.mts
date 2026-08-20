@@ -1,17 +1,20 @@
 import { defineConfig } from 'vitepress'
 
 // ja/en で同一のファイル構成（CLAUDE.md の規約）。章の追加・削除時はここも更新する。
+// 章順は「触る順 / よく使う順」（2026-08-20 オーナー指示）。
 const chapters = [
   { file: '01-getting-started', ja: 'はじめに', en: 'Getting Started' },
-  { file: '02-ui-overview', ja: '画面構成', en: 'UI Overview' },
-  { file: '03-patterns', ja: 'パターン管理', en: 'Patterns' },
-  { file: '04-curve-editing', ja: 'カーブ編集', en: 'Curve Editing' },
-  { file: '05-sections', ja: 'セクション', en: 'Sections' },
-  { file: '06-devices', ja: 'デバイス接続', en: 'Devices' },
-  { file: '07-playback', ja: '再生操作', en: 'Playback' },
-  { file: '08-file-operations', ja: 'ファイル操作', en: 'File Operations' },
-  { file: '09-shortcuts', ja: 'ショートカット', en: 'Shortcuts' },
-  { file: '10-faq', ja: 'FAQ', en: 'FAQ' },
+  { file: '02-display-layout', ja: '表示とレイアウト', en: 'Display & Layout' },
+  { file: '03-patterns', ja: 'パターン', en: 'Patterns' },
+  { file: '04-import-save', ja: 'インポートと保存', en: 'Import & Save' },
+  { file: '05-devices', ja: 'デバイス', en: 'Devices' },
+  { file: '06-curve-editor', ja: 'カーブエディタ', en: 'Curve Editor' },
+  { file: '07-properties', ja: 'プロパティ', en: 'Properties' },
+  { file: '08-sections', ja: 'セクションデータ', en: 'Section Data' },
+  { file: '09-waveform-generation', ja: '波形生成', en: 'Waveform Generation' },
+  { file: '10-waveform-library', ja: '波形ライブラリ', en: 'Waveform Library' },
+  { file: '11-shortcuts', ja: 'ショートカット', en: 'Shortcuts' },
+  { file: '12-faq', ja: 'FAQ', en: 'FAQ' },
 ]
 
 const sidebar = (locale: 'ja' | 'en', label: string) => [
@@ -82,9 +85,9 @@ export default defineConfig({
         },
       },
     },
-    // ARK のマーク（方舟）。実体は plugins/ark-design/design/assets/ark-mark.svg の写し。
-    // fill=currentColor なので、テーマ側の色（.VPImage に当てている）で青になる。
-    logo: '/ark-mark.svg',
+    // すとりみっくす！のロゴ。実体は stremix-ui/registry/stremix/logo/ の写し。
+    // 2 枚構成（light / dark）が規約（stremix-design GUIDELINES §4-6。色反転の使い回し禁止）。
+    logo: { light: '/logo.svg', dark: '/logo-dark.svg' },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/stremix-jp/remix-editor-docs' },
     ],

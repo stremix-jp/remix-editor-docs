@@ -1,4 +1,4 @@
-# Device Connection
+# Devices
 
 remix-editor can control various devices through Intiface Central.
 
@@ -70,6 +70,8 @@ While connected, remix-editor polls the Intiface Central device list, so devices
 
 ## Device List
 
+![Devices Panel](./images/06-device-panel.png)
+
 Connected devices are shown in the list in the Devices panel.
 
 ### Display Information
@@ -128,15 +130,17 @@ Device mapping is configured in the **Patterns panel**. Expand a pattern and ope
 
 If no device is connected, "No devices connected" is shown.
 
-### Preferred Device / Preferred Actuator
+### Preferred Device × Preferred Actuator
 
-Pattern settings include "Preferred Device" and "Preferred Actuator", which indicate the body part and the kind of motion the pattern is intended for. They are saved in the Remix file and used to assign devices on the playback side.
+Pattern settings include "Preferred Device" (body part) and "Preferred Actuator" (kind of motion), and **the combination of these two determines the pattern's effective device type**. Automatic setup assigns actuators based on this combination, and it is also saved in the Remix file and used to assign devices on the playback side.
 
 **Preferred Device**: None / Penis Device / Anal Device / Nipple Device / Vaginal Device / Clitoral Device
 
 **Preferred Actuator**: None / Vibrate / Rotate / Linear (experimental mode also offers the additional types listed above)
 
 > **Preferred Actuator must be set** in order to export or save a Remix. Export is blocked while any pattern has it unset.
+
+See [Patterns > Preferred Device and Preferred Actuator](./03-patterns.md#preferred-device-and-preferred-actuator) for details.
 
 ### One-to-Many Mapping
 
@@ -145,6 +149,28 @@ One pattern can be sent to multiple devices/actuators simultaneously.
 ### Conflict Avoidance
 
 Actuators already connected to another pattern are grayed out and show "Connected to {pattern name}".
+
+## Device Control During Playback
+
+During playback, pattern values are automatically sent to connected devices. The pattern's **output must be enabled** (power icon).
+
+### Differences by Actuator Type
+
+| Type | Behavior |
+|------|----------|
+| Vibrate | Immediate control (value directly becomes intensity) |
+| Rotate | Immediate control (positive/negative changes rotation direction) |
+| Linear | Position-based (takes time to move to the specified position) |
+
+### Playhead Offset
+
+You can set an offset between the audio and the timing of what is sent to devices.
+
+- Default: **0.2 sec**
+- Range: -1 second to +1 second (positive values make the device lead, negative values delay it)
+- Use: Compensate for device response delay
+
+Change it in **Settings > Playback > Playhead Offset**.
 
 ## Test Control
 

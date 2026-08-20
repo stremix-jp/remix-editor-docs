@@ -1,6 +1,8 @@
-# Pattern Management
+# Patterns
 
 A control pattern is the data that defines the value changes sent to a device. You can create multiple patterns and assign each one to a different device.
+
+![Pattern List](./images/02-pattern-list.png)
 
 ## Basic Pattern Operations
 
@@ -25,6 +27,7 @@ A new pattern contains only 2 points: the start point (time = 0, value 0) and th
 ### Renaming a Pattern
 
 - Type into the "Name" field in the settings area
+- A name that tells you which body part and which kind of motion the pattern is for keeps patterns easy to manage as their number grows
 
 ### Reordering Patterns
 
@@ -69,11 +72,12 @@ The following settings are available per pattern.
 - Pick any color with the color picker
 - Next to it are 8 presets (pink, cyan, violet, blue, green, yellow, orange, red) that apply instantly when clicked
 - The color is reflected in the Curve Editor display
+- Using a different color per role makes patterns easier to tell apart when several are shown
 
 ### Max (maxValue)
 
 - Sets the upper limit of the pattern's values
-- Default: 20 (the initial value for new patterns can be changed in Settings > Editor > Default Max Value)
+- Default: 20 (the initial value for new patterns can be changed in Settings > Curve Editor > Default Max Value)
 - Values sent to the device are normalized to 0% - 100%
 
 **Example**: With a Max of 20
@@ -96,9 +100,11 @@ The following settings are available per pattern.
 
 The minimum value is also the lower bound of the Quick Point Bar. When negative values are allowed, the Quick Point Bar buttons start from the negative side.
 
-### Preferred Device
+### Preferred Device and Preferred Actuator
 
-The device type to prefer when automatically connecting the pattern to a device.
+Two settings that express which body part and what kind of motion the pattern is meant for. **The combination of the two determines the pattern's effective device type.** They are used for automatic connection and for device assignment on the playback side.
+
+**Preferred Device** (body part):
 
 - Penis Device
 - Anal Device
@@ -107,11 +113,7 @@ The device type to prefer when automatically connecting the pattern to a device.
 - Clitoral Device
 - None (excluded from automatic connection)
 
-### Preferred Actuator
-
-The actuator type to prefer when connecting the pattern.
-
-Three types are available by default.
+**Preferred Actuator** (kind of motion). Three types are available by default.
 
 - **Vibrate**: Vibration
 - **Rotate**: Rotation
@@ -119,7 +121,9 @@ Three types are available by default.
 
 Enabling Settings > General > Experimental Mode adds Oscillate / Constrict / Inflate / Position / Spray / Temperature / LED.
 
-**Note**: If any pattern has no Preferred Actuator set, saving the Remix fails with an error and no file is written. Always set it before saving. (This error message is currently shown in Japanese regardless of the language setting.)
+**Example**: "Penis Device × Linear" means a piston-style motion, "Nipple Device × Rotate" means rotation aimed at the nipples — the combination is what gives the pattern its meaning.
+
+**Note**: If any pattern has no Preferred Actuator set, saving the Remix fails with an error and no file is written. Always set it before saving.
 
 ### Reset Waveform
 
@@ -135,11 +139,11 @@ At the bottom of the pattern settings, the connected devices and their actuators
 - One pattern can also be assigned to several actuators
 - Actuators already used by another pattern are greyed out
 
-See [Device Connection](./06-devices.md) for details.
+See [Devices](./05-devices.md) for details.
 
 ## Settings That Are Not Per-Pattern
 
-The following two are **editor-wide settings** and cannot be set per pattern. Change them in Settings > Editor.
+The following two are **editor-wide settings** and cannot be set per pattern. Change them in Settings > Curve Editor.
 
 - **Max Time**: The length of the whole timeline (seconds)
 - **Time Step**: The minimum unit of the time axis (seconds)
@@ -150,23 +154,7 @@ The only increment you can set per pattern is the one on the value axis (Step).
 
 Below the pattern name, the value at the current playback position and the assigned device information are always shown, so you can check how much intensity is being sent to the device. When there is no assignment, "Not connected" is shown.
 
-## Best Practices
-
-### Pattern Naming
-
-Clear names make patterns easier to manage.
-
-**Good examples**:
-- "Main Vibration"
-- "Linear Motion"
-- "BGM Sync"
-
-### Color Coding
-
-- Using a different color per role makes patterns easier to tell apart when several are shown
-- Example: blue for vibration, red for linear
-
-### Number of Patterns
+## Number of Patterns
 
 - The number of patterns you need depends on your device configuration
 - One pattern per device is the basic approach, but the same pattern can also be sent to multiple devices

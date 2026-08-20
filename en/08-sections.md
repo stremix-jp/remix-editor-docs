@@ -1,14 +1,14 @@
-# Sections
+# Section Data
 
-Sections are interval data for audio. Import them from a CSV file and automatically generate waveforms from section attribute values.
+Section data is information attached to each interval (start time to end time) of the audio. It can hold arbitrary attributes such as a transcript or notes.
 
-## What Are Sections?
+The primary use is **viewing**.
 
-Sections are data associated with a specific time range in the audio.
+- **Checking the transcript**: Edit while checking, in a table, what is being said where in the audio
+- **Notes**: Write down remarks and intent for each interval
+- **Navigation**: Click a row to jump straight to that scene
 
-**Example**: A section from 0:30 to 0:45 of the audio with "intensity: 10"
-
-This lets you efficiently build control patterns that match the content of the audio.
+As an advanced use, there is also a feature that [automatically generates waveforms](#generating-waveforms-from-sections) from interval attribute values.
 
 ## Importing Sections
 
@@ -20,7 +20,7 @@ A section CSV requires the following columns:
 |--------|----------|-------------|
 | start_time | Yes | Section start time (seconds) |
 | end_time | Yes | Section end time (seconds) |
-| (others) | No | Any attribute columns |
+| (others) | No | Any attribute columns (transcript, notes, intensity, etc.) |
 
 **CSV example**:
 ```csv
@@ -31,16 +31,18 @@ start_time,end_time,intensity_params,note
 45,60,5,Outro
 ```
 
-**Note**: Columns used for waveform generation require the `_params` suffix (details below).
+**Note**: Columns used for waveform generation require the `_params` suffix (see [below](#generating-waveforms-from-sections) for details).
 
 ### How to Import
 
 1. Select **File > Import Section Data...**
 2. Select the CSV file
 
-You can also import from the toolbar of the Sections panel, or by dragging and dropping the CSV file onto the app.
+You can also import from the toolbar of the Sections panel. Dragging and dropping the CSV file onto the app also imports it.
 
 ## Sections Panel
+
+![Section Panel](./images/04-section-panel.png)
 
 Imported sections are displayed as a table.
 
@@ -51,7 +53,7 @@ Clicking a row does two things at once.
 1. The Curve Editor selection is set to that section's time range
 2. The playback position moves to the section's start time
 
-Because choosing a section already determines the target range for waveform generation, there is no need for a separate "set as selection" action.
+When you want to fix the curve for a particular scene, a single click on the row both selects the target range and cues it up.
 
 Use **Shift + click** to select several sections at once. The number of selected sections is shown as a badge in the toolbar.
 
@@ -67,7 +69,11 @@ Use **Shift + click** to select several sections at once. The number of selected
 
 At the right end, the number of selected sections and the filename of the loaded CSV are shown.
 
+If you enable **Auto-scroll** while playing, the row for the scene currently playing is always kept in view. This is convenient for reviewing while following the transcript with your eyes.
+
 ### Editing Cells
+
+Cell contents, such as adding to a note, can be edited directly in the table.
 
 1. Click a cell to enter edit mode
 2. Enter a value
@@ -95,6 +101,8 @@ You can move between sections with the keyboard.
 
 **Note**: Keyboard navigation only changes which section is selected; **the playback position does not move**. If you want the playback position to move as well, click a row or use the ◀ ▶ buttons in the toolbar or footer.
 
+When sections are loaded, the buttons at both ends of the footer transport also become "move to the previous / next section" buttons.
+
 ## Gap Sections
 
 When there is empty space between sections, a "gap section" is generated automatically.
@@ -105,9 +113,21 @@ When there is empty space between sections, a "gap section" is generated automat
 
 **Note**: In waveform generation, a gap section **inherits the value of the preceding section** (for a range value, it inherits the end value). It is displayed as "-", but that does not mean the value is 0.
 
+## Exporting Sections
+
+You can save the edited section data as CSV.
+
+1. Select **File > Export Section Data...** (also available from the Sections panel toolbar)
+2. The file is downloaded
+
+The filename has one of the following formats.
+
+- Normal: `{audio filename}.{timestamp}.sections.csv`
+- When opened with work information: `{circle name}-{work number}-{chapter number}.{date}.csv`
+
 ## Generating Waveforms from Sections
 
-You can automatically generate a waveform from section attribute values.
+From here on, this is an advanced use. You can automatically generate a waveform from section attribute values.
 
 ### Columns That Support Waveform Generation
 
@@ -186,23 +206,11 @@ Presets are remembered per column, so you can use different ones for different c
 
 Groups are split by gap sections, and the phase is reset between groups.
 
-## Exporting Sections
-
-You can save the edited section data as CSV.
-
-1. Select **File > Export Section Data...** (also available from the Sections panel toolbar)
-2. The file is downloaded
-
-The filename has one of the following formats.
-
-- Normal: `{audio filename}.{timestamp}.sections.csv`
-- When opened with work information: `{circle name}-{work number}-{chapter number}.{date}.csv`
-
-## Parameter Format
+### Parameter Format
 
 This section explains the format of values entered in a `_params` column.
 
-### Basic Format
+#### Basic Format
 
 ```
 {intensity 0-100}{text}
@@ -211,11 +219,10 @@ This section explains the format of values entered in a `_params` column.
 **Examples**:
 - `30` - intensity 30
 - `30全体` - intensity 30, text "全体"
-- `70根元` - intensity 70, text "根元"
 
 The intensity is clamped to the range 0-100 and normalized to 0-1 internally. If you write only text, the intensity is treated as 0.
 
-### Changing Values
+#### Changing Values
 
 ```
 {start value}->{end value}{text}
@@ -225,41 +232,6 @@ The intensity is clamped to the range 0-100 and normalized to 0-1 internally. If
 - `10->30` - intensity changes from 10 to 30
 - `0->50全体` - intensity changes from 0 to 50, text "全体"
 
-### What the Text Is For
+#### What the Text Is For
 
-The text portion is used in combination with "Text Rules".
-
-The built-in presets match Japanese text, so the strings below are entered exactly as shown regardless of the UI language.
-
-**Linear (Penis) preset example**:
-| Text | Operating range |
-|------|-----------------|
-| 全体 (whole) | 0-100% |
-| 先端 (tip) | 70-100% |
-| 軸部 (shaft) | 30-70% |
-| 根元 (base) | 0-30% |
-
-**Rotation preset example**:
-| Text | Action |
-|------|--------|
-| 右回転 (clockwise) | Rotate in the positive direction |
-| 左回転 (counter-clockwise) | Rotate in the negative direction |
-
-## Device-Specific Production Tips
-
-### Linear Devices (A10 Piston, The Handy, etc.)
-
-- **Use simple waveforms**: Up-and-down motion such as a triangle wave is the basis
-- **Avoid complex shapes**: Complex waveforms make device movement jerky
-- **Rest position**: The initial and rest positions are best at the top (value = max value)
-
-### Vibration Devices (Anal plugs, etc.)
-
-- **Rest position**: The initial and rest positions are best at the bottom (value = 0)
-- **Triangle / sine waves**: Use them to express piston-like motion
-
-### Rotation Devices (Nipple machines, etc.)
-
-- **Allow negative values**: Enable "Allow Negative Values" to switch the direction of rotation
-- **Positive = clockwise, negative = counter-clockwise**
-- **Separate left/right control**: For nipple-focused content, setting different waveforms for left and right increases immersion
+The text portion is used in combination with "Text Rules". For example, by creating a rule for a linear device such as "for this text, limit the operating range to 70-100%", or one for a rotation device such as "for this text, output in the negative direction (reverse rotation)", you can shape different motions just by writing the section table.

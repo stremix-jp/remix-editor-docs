@@ -85,7 +85,7 @@ Note that Redo is **Ctrl + Shift + Z**. Ctrl + Y is not assigned.
 
 ### Q: Pressing a shortcut does nothing
 
-Copy/paste, delete, select all, zoom, waveform generation, the J/F keys, and others only work **while the Curve Editor panel is active**. Click the curve editor and try again. See [Shortcuts](./09-shortcuts.md) for details.
+Copy/paste, delete, select all, zoom, waveform generation, the J/F keys, and others only work **while the Curve Editor panel is active**. Click the curve editor and try again. See [Shortcuts](./11-shortcuts.md) for details.
 
 ### Q: Edited data disappeared
 
