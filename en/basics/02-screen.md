@@ -16,7 +16,7 @@ The screen is split into three areas from top to bottom.
 
 ## Panels used in production
 
-There are 9 kinds of panels, but the Basics Course uses these 5. Learn their position in the default layout and their role.
+There are 9 kinds of panels, but the Basics uses these 5. Learn their position in the default layout and their role.
 
 | Panel | Default position | Role | Lesson |
 |-------|------------------|------|--------|

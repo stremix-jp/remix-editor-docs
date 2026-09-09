@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 // ja/en で同一のファイル構成（CLAUDE.md の規約）。章の追加・削除時はここも更新する。
-// 2 部構成: 基礎講座（basics/。作る順に読む通し講座）と リファレンス（機能ごと。よく使う順）。
+// 2 部構成: 基礎（basics/。作る順に読む通し講座）と リファレンス（機能ごと。よく使う順）。
 const basics = [
   { file: 'basics/01-open', ja: '1. エディタを開く', en: '1. Opening the Editor' },
   { file: 'basics/02-screen', ja: '2. 画面の構成', en: '2. Screen Layout' },
@@ -58,7 +58,7 @@ export default defineConfig({
       description: 'remix-editor ユーザーガイド',
       themeConfig: {
         nav: [{ text: 'ガイド', link: '/ja/' }],
-        sidebar: sidebar('ja', { basics: '基礎講座', reference: 'リファレンス' }),
+        sidebar: sidebar('ja', { basics: '基礎', reference: 'リファレンス' }),
         outline: { label: 'このページの内容' },
         docFooter: { prev: '前のページ', next: '次のページ' },
         lastUpdatedText: '最終更新',
@@ -73,7 +73,7 @@ export default defineConfig({
       description: 'remix-editor User Guide',
       themeConfig: {
         nav: [{ text: 'Guide', link: '/en/' }],
-        sidebar: sidebar('en', { basics: 'Basics Course', reference: 'Reference' }),
+        sidebar: sidebar('en', { basics: 'Basics', reference: 'Reference' }),
       },
     },
   },

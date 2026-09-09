@@ -38,7 +38,7 @@ Triangle waves also have a "peak position" that changes the ratio of rise to fal
 
 ## Other waveform types
 
-Sine, square, random, and triangle (slope) are available. Square is an ON / OFF pulse; triangle (slope) sets speed as "how many value units per second". See the [Reference on waveform generation](../09-waveform-generation.md) for when to use each. The Basics Course only needs triangle waves.
+Sine, square, random, and triangle (slope) are available. Square is an ON / OFF pulse; triangle (slope) sets speed as "how many value units per second". See the [Reference on waveform generation](../09-waveform-generation.md) for when to use each. The Basics only needs triangle waves.
 
 ## What to do in this lesson
 

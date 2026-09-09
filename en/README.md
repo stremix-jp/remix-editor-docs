@@ -2,9 +2,9 @@
 
 remix-editor is a web application for visually editing value changes along a timeline (curves) and controlling compatible devices.
 
-This guide has two parts. If you are new, read the **Basics Course** from lesson 1 in order. That alone is enough to build a Remix. The **Reference** describes each feature individually, for looking things up when needed.
+This guide has two parts. If you are new, read the **Basics** from lesson 1 in order. That alone is enough to build a Remix. The **Reference** describes each feature individually, for looking things up when needed.
 
-## Basics Course
+## Basics
 
 A 10-lesson walkthrough in the order you actually work.
 

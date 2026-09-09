@@ -15,7 +15,7 @@ A new pattern has only two points at value 0: the start (time 0) and the end (ma
 
 ## Opening the settings
 
-Click the **▶** to the left of the pattern name to expand its settings. The Basics Course always touches these four.
+Click the **▶** to the left of the pattern name to expand its settings. The Basics always touches these four.
 
 ### Name
 
