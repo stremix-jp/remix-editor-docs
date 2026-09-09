@@ -4,11 +4,11 @@ import { defineConfig } from 'vitepress'
 // 2 部構成: 基礎講座（basics/。作る順に読む通し講座）と リファレンス（機能ごと。よく使う順）。
 const basics = [
   { file: 'basics/01-open', ja: '1. エディタを開く', en: '1. Opening the Editor' },
-  { file: 'basics/02-screen', ja: '2. 画面の見取り図', en: '2. Screen Map' },
+  { file: 'basics/02-screen', ja: '2. 画面の構成', en: '2. Screen Layout' },
   { file: 'basics/03-playback', ja: '3. 再生と移動、ズーム', en: '3. Playback, Seeking & Zoom' },
   { file: 'basics/04-patterns', ja: '4. パターンを用意する', en: '4. Setting Up Patterns' },
   { file: 'basics/05-sections', ja: '5. セクションを読む', en: '5. Reading Sections' },
-  { file: 'basics/06-generate', ja: '6. 波形を敷く', en: '6. Laying Down Waveforms' },
+  { file: 'basics/06-generate', ja: '6. 波形を生成する', en: '6. Generating Waveforms' },
   { file: 'basics/07-adjust', ja: '7. 手で調整する', en: '7. Adjusting by Hand' },
   { file: 'basics/08-preview', ja: '8. プレビューする', en: '8. Previewing' },
   { file: 'basics/09-save', ja: '9. 保存する', en: '9. Saving' },

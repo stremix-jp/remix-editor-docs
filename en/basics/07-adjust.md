@@ -1,6 +1,6 @@
 # 7. Adjusting by Hand
 
-A freshly laid waveform usually has its start and end out of sync with the audio, or is flat where you want the intensity to change within a scene. In this lesson you learn to **place, move, and delete** points, **reshape** a range at once, and align **precisely with numbers**.
+A freshly generated waveform usually has its start and end out of sync with the audio, or is flat where you want the intensity to change within a scene. In this lesson you learn to **place, move, and delete** points, **reshape** a range at once, and align **precisely with numbers**.
 
 ![Curve editor](../images/03-curve-editor.png)
 

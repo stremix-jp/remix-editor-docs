@@ -5,11 +5,11 @@ The Basics Course walks through **making a Remix for one audio file and saving i
 | Lesson | Topic |
 |--------|-------|
 | 1 | Opening the editor (this page) |
-| 2 | [Screen map](./02-screen.md) |
+| 2 | [Screen layout](./02-screen.md) |
 | 3 | [Playback, seeking & zoom](./03-playback.md) |
 | 4 | [Setting up patterns](./04-patterns.md) |
 | 5 | [Reading sections](./05-sections.md) |
-| 6 | [Laying down waveforms](./06-generate.md) |
+| 6 | [Generating waveforms](./06-generate.md) |
 | 7 | [Adjusting by hand](./07-adjust.md) |
 | 8 | [Previewing](./08-preview.md) |
 | 9 | [Saving](./09-save.md) |
@@ -49,8 +49,8 @@ If the audio length and the Remix length (max time) differ by 3 seconds or more,
 
 ## The state right after opening
 
-The first time you open it there are no patterns (places to put curves) at all. To draw a curve you first create a pattern, which is lesson 4. Before that, lessons 2 and 3 cover reading the screen and playing audio.
+The first time you open it there are no patterns (the units that hold curves) at all. To draw a curve you first create a pattern, which is lesson 4. Before that, lessons 2 and 3 cover reading the screen and playing audio.
 
 ## Next
 
-[2. Screen Map](./02-screen.md)
+[2. Screen Layout](./02-screen.md)

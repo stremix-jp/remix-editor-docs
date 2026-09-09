@@ -1,6 +1,6 @@
 # 5. Reading Sections
 
-**Section data** divides the audio into ranges (start time to end time), each with a transcript, notes, and so on. It is the "script" for making a Remix. In this lesson you learn to **read sections, jump to scenes, and leave notes**.
+**Section data** divides the audio into ranges (start time to end time), each with a transcript, notes, and so on. While making a Remix, it tells you what is happening at each point in the audio. In this lesson you learn to **read sections, jump to scenes, and leave notes**.
 
 ![Sections panel](../images/04-section-panel.png)
 
@@ -30,7 +30,7 @@ Clicking a row does two things at once:
 1. The **selection** in the curve editor becomes that section's time range
 2. The **playback position** moves to the start of that section
 
-So when you want to work on a scene's curve, one click on the row selects the range and cues it up. Lesson 6, "Laying down waveforms", starts from this state.
+So when you want to work on a scene's curve, one click on the row selects the range and cues it up. Lesson 6, "Generating waveforms", starts from this state.
 
 **Shift + click** selects several sections together.
 
@@ -61,4 +61,4 @@ Listen through the audio once while following the transcript. Note misheard pass
 
 ## Next
 
-[6. Laying Down Waveforms](./06-generate.md)
+[6. Generating Waveforms](./06-generate.md)

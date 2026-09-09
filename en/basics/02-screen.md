@@ -1,14 +1,14 @@
-# 2. Screen Map
+# 2. Screen Layout
 
 The remix-editor screen is built from several **panels**. In this lesson you learn where the panels used for production are and what each one is for.
 
 ![Full screen](../images/01-full-screen.png)
 
-## Three bands
+## Three areas
 
-The screen is split into three bands from top to bottom.
+The screen is split into three areas from top to bottom.
 
-| Band | Content |
+| Area | Content |
 |------|---------|
 | Top | Menu bar (File / Edit / View / Device / Help) |
 | Middle | Panel area. Almost all of the work happens here |
@@ -20,10 +20,10 @@ There are 9 kinds of panels, but the Basics Course uses these 5. Learn their pos
 
 | Panel | Default position | Role | Lesson |
 |-------|------------------|------|--------|
-| **Patterns** | Left | Where the curve for each device lives. Switch "which device's curve am I drawing" here | 4 |
-| **Curve Editor** | Center | The main place to draw curves. The audio waveform is shown faintly in the background | 6, 7 |
+| **Patterns** | Left | The curve for each device. Switch "which device's curve am I drawing" here | 4 |
+| **Curve Editor** | Center | The main editing area for curves. The audio waveform is shown faintly in the background | 6, 7 |
 | **Sections** | Bottom | Checking the transcript, notes, jumping to a scene | 5 |
-| **Waveform Generator** | Right | Lay a standard waveform such as a triangle wave over a range in one go | 6 |
+| **Waveform Generator** | Right | Generate a standard waveform such as a triangle wave over a range in one go | 6 |
 | **Properties** | Right | Edit the time and value of a selected point numerically | 7 |
 
 In addition, the **Devices** panel is used when checking with a real device (lesson 8).

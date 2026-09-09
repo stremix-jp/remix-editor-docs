@@ -1,6 +1,6 @@
-# 6. Laying Down Waveforms
+# 6. Generating Waveforms
 
-You can build a curve one point at a time, but for the strokes in an action scene it is far faster and more consistent to **lay a standard waveform over the range and then fix it by hand**. In this lesson you lay down a triangle wave with the Waveform Generator panel.
+You can build a curve one point at a time, but for the strokes in an action scene it is far faster and more consistent to **generate a standard waveform over the range and then fix it by hand**. In this lesson you generate a triangle wave with the Waveform Generator panel.
 
 ![Waveform Generator panel](../images/07-waveform-generator.png)
 
@@ -42,7 +42,7 @@ Sine, square, random, and triangle (slope) are available. Square is an ON / OFF 
 
 ## What to do in this lesson
 
-Click the sections you noted in lesson 5 as "scenes with motion" one by one and lay a triangle wave over each. Vary amplitude, frequency, and offset per scene and confirm that the depth, speed, and height of the motion visibly differ.
+Click the sections you noted in lesson 5 as "scenes with motion" one by one and generate a triangle wave over each. Vary amplitude, frequency, and offset per scene and confirm that the depth, speed, and height of the motion visibly differ.
 
 ## Next
 

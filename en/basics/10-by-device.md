@@ -35,7 +35,7 @@ Rearranging the course into the order of actual production:
 1. Open the editor and confirm the audio and sections are loaded (lesson 1)
 2. Create the needed patterns and set name, preferred device, and preferred actuator. Allow negative values only for rotation (lesson 4)
 3. Listen through while reading the sections and note scenes with motion and the climax (lessons 3 and 5)
-4. Click each scene's section row and lay a triangle wave or similar (lesson 6)
+4. Click each scene's section row and generate a triangle wave or similar (lesson 6)
 5. Align motion starts and ends and add intensity changes within scenes (lesson 7)
 6. Play through to check, and clear red segments with speed coloring (lesson 8)
 7. Save (lesson 9)

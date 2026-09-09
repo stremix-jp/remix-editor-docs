@@ -1,6 +1,6 @@
 # 4. Setting Up Patterns
 
-A **pattern** is the place where the curve for one kind of device lives. A Remix is "one audio file × several patterns". Before drawing curves, create the patterns you need and finish their settings.
+A **pattern** is the curve for one kind of device. A Remix is "one audio file × several patterns". Before drawing curves, create the patterns you need and finish their settings.
 
 ![Pattern list](../images/02-pattern-list.png)
 

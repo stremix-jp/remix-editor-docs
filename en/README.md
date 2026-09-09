@@ -9,11 +9,11 @@ This guide has two parts. If you are new, read the **Basics Course** from lesson
 A 10-lesson walkthrough in the order you actually work.
 
 1. [Opening the Editor](./basics/01-open.md) - The two ways to open it and loading audio
-2. [Screen Map](./basics/02-screen.md) - The 5 panels used in production
+2. [Screen Layout](./basics/02-screen.md) - The 5 panels used in production
 3. [Playback, Seeking & Zoom](./basics/03-playback.md) - Play, seek, zoom, loop
 4. [Setting Up Patterns](./basics/04-patterns.md) - Adding patterns and the required settings
 5. [Reading Sections](./basics/05-sections.md) - Checking the transcript, jumping to scenes, notes
-6. [Laying Down Waveforms](./basics/06-generate.md) - Generating a triangle wave over a range
+6. [Generating Waveforms](./basics/06-generate.md) - Generating a triangle wave over a range
 7. [Adjusting by Hand](./basics/07-adjust.md) - Placing, moving, resizing selections, numeric editing
 8. [Previewing](./basics/08-preview.md) - Checking on screen and on a device, speed coloring
 9. [Saving](./basics/09-save.md) - Saving directly to the CMS and saving as a file
@@ -32,7 +32,7 @@ Feature-by-feature descriptions. Start from what you want to do.
 | Place points and manipulate curves | [Curve Editor](./06-curve-editor.md) |
 | Fine-tune points numerically | [Properties](./07-properties.md) |
 | Read sections (transcripts) and the CSV format | [Section Data](./08-sections.md) |
-| Lay triangle / square waves, or generate from audio or sections | [Waveform Generation](./09-waveform-generation.md) |
+| Generate triangle / square waves, or generate from audio or sections | [Waveform Generation](./09-waveform-generation.md) |
 | Save favorite waveforms and reuse them | [Waveform Library](./10-waveform-library.md) |
 | Work faster with the keyboard | [Shortcuts](./11-shortcuts.md) |
 | When something goes wrong | [FAQ](./12-faq.md) |
