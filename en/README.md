@@ -2,22 +2,40 @@
 
 remix-editor is a web application for visually editing value changes along a timeline (curves) and controlling compatible devices.
 
-## Table of Contents
+This guide has two parts. If you are new, read the **Basics Course** from lesson 1 in order. That alone is enough to build a Remix. The **Reference** describes each feature individually, for looking things up when needed.
 
-The chapters are ordered from the most frequently used features.
+## Basics Course
 
-1. [Getting Started](./01-getting-started.md) - Basic usage and workflow
-2. [Display and Layout](./02-display-layout.md) - Map of the screen, panel arrangement, and the playback footer
-3. [Patterns](./03-patterns.md) - Creating and configuring control patterns
-4. [Import and Save](./04-import-save.md) - Loading and saving files (local / CMS)
-5. [Devices](./05-devices.md) - Integration with Intiface and mapping
-6. [Curve Editor](./06-curve-editor.md) - Adding, moving, and selecting points, and pivots
-7. [Properties](./07-properties.md) - Editing point coordinates numerically
-8. [Section Data](./08-sections.md) - Reviewing transcripts, notes, and navigation
-9. [Waveform Generation](./09-waveform-generation.md) - Bulk generation of waveforms such as triangle waves
-10. [Waveform Library](./10-waveform-library.md) - Saving and reusing waveform snippets
-11. [Shortcuts](./11-shortcuts.md) - Keyboard shortcut reference
-12. [FAQ](./12-faq.md) - Frequently asked questions
+A 10-lesson walkthrough in the order you actually work.
+
+1. [Opening the Editor](./basics/01-open.md) - The two ways to open it and loading audio
+2. [Screen Map](./basics/02-screen.md) - The 5 panels used in production
+3. [Playback, Seeking & Zoom](./basics/03-playback.md) - Play, seek, zoom, loop
+4. [Setting Up Patterns](./basics/04-patterns.md) - Adding patterns and the required settings
+5. [Reading Sections](./basics/05-sections.md) - Checking the transcript, jumping to scenes, notes
+6. [Laying Down Waveforms](./basics/06-generate.md) - Generating a triangle wave over a range
+7. [Adjusting by Hand](./basics/07-adjust.md) - Placing, moving, resizing selections, numeric editing
+8. [Previewing](./basics/08-preview.md) - Checking on screen and on a device, speed coloring
+9. [Saving](./basics/09-save.md) - Saving directly to the CMS and saving as a file
+10. [Basics by Device Type](./basics/10-by-device.md) - Linear, vibrate, rotate, and the flow for finishing one Remix
+
+## Reference
+
+Feature-by-feature descriptions. Start from what you want to do.
+
+| What you want to do | Chapter |
+|---------------------|---------|
+| Rearrange the screen, or a panel is missing | [Display & Layout](./02-display-layout.md) |
+| Create and configure patterns | [Patterns](./03-patterns.md) |
+| Save and load (local / CMS) | [Import & Save](./04-import-save.md) |
+| Connect a real device | [Devices](./05-devices.md) |
+| Place points and manipulate curves | [Curve Editor](./06-curve-editor.md) |
+| Fine-tune points numerically | [Properties](./07-properties.md) |
+| Read sections (transcripts) and the CSV format | [Section Data](./08-sections.md) |
+| Lay triangle / square waves, or generate from audio or sections | [Waveform Generation](./09-waveform-generation.md) |
+| Save favorite waveforms and reuse them | [Waveform Library](./10-waveform-library.md) |
+| Work faster with the keyboard | [Shortcuts](./11-shortcuts.md) |
+| When something goes wrong | [FAQ](./12-faq.md) |
 
 ## Requirements
 
