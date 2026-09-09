@@ -1,6 +1,6 @@
 # 1. Opening the Editor
 
-The Basics Course walks through **making a Remix for one audio file and saving it**, in the order you actually work, over 10 lessons. What is written here is enough to build a Remix. Detailed explanations of individual features are left to the [Reference](../README.md#reference); this course only covers what to do, in what order, and how.
+The Basics Course walks through **making a Remix for one audio file and saving it**, in the order you actually work, over 10 lessons. What is written here is enough to build a Remix. Detailed explanations of individual features are in the [Reference](../README.md#reference). This course follows what to do, in what order, and how.
 
 | Lesson | Topic |
 |--------|-------|
