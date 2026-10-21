@@ -8,6 +8,8 @@
 
   "compatibility_date": "2026-07-01",
 
+  "compatibility_flags": ["no_brotli_content_encoding"],
+
   // 公開ドキュメントサイト。custom_domain 経由のみ（workers.dev は無効化）。
   "workers_dev": false,
   "routes": [{ "pattern": "remix-editor-docs.stremix.jp", "custom_domain": true }],
